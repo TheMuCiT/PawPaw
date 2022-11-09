@@ -31,8 +31,9 @@ const size = {
    */
   xxlg: 30,
   /**
-   * @param 12
+   * @param 64
    */
+  logo: 64,
 };
 
 const family = {

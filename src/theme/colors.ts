@@ -36,6 +36,16 @@ const colors = {
    * @param placeholder color B91010
    */
   button: '#B91010',
+
+  /**
+   * @param placeholder color B91010
+   */
+  logo: '#B91010',
+
+  /**
+   * @param placeholder white  FFFFFF
+   */
+  white: '#FFFFFF',
 };
 
 export default colors;
