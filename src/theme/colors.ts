@@ -18,6 +18,11 @@ const colors = {
   main: '#D9D9D9',
 
   /**
+   * @param Main text color B91010
+   */
+  mainSecond: '#B91010',
+
+  /**
    * @param Input background color 3F3F3F
    */
   inputBC: '#3F3F3F',

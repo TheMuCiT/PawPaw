@@ -37,15 +37,40 @@ const styles = StyleSheet.create({
 
   InputElement: {
     width: '100%',
+    height: sizes.height.input,
     color: colors.main,
     backgroundColor: colors.inputBC,
     borderRadius: sizes.bordersRadius.input,
     borderColor: colors.border,
     borderWidth: sizes.borderWidth.input,
     paddingHorizontal: sizes.padding.inputHorizontal,
-    paddingVertical: sizes.padding.inputVertical,
     placeholderTextColor: 'red',
     marginBottom: sizes.padding.inputBottom,
+
+    fontSize: fonts.size.sm,
+    fontFamily: fonts.family.regular,
+  },
+
+  InputElementDate: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'space-between',
+
+    height: sizes.height.input,
+
+    backgroundColor: colors.inputBC,
+
+    borderRadius: sizes.bordersRadius.input,
+    borderColor: colors.border,
+    borderWidth: sizes.borderWidth.input,
+    paddingHorizontal: sizes.padding.inputHorizontal,
+    marginBottom: sizes.padding.inputBottom,
+  },
+
+  InputElementText: {
+    fontSize: fonts.size.sm,
+    fontFamily: fonts.family.regular,
+    color: colors.main,
   },
 
   Button: {

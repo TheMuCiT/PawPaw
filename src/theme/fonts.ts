@@ -27,9 +27,9 @@ const size = {
    */
   xlg: 24,
   /**
-   * @param 30
+   * @param 32
    */
-  xxlg: 30,
+  xxlg: 32,
   /**
    * @param 64
    */
