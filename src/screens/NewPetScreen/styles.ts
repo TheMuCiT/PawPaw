@@ -86,6 +86,41 @@ const styles = StyleSheet.create({
     textTransform: 'uppercase',
     padding: sizes.padding.buttonPadding,
   },
+
+  BackgroundLogo1: {
+    position: 'absolute',
+    top: '80%',
+    left: '13%',
+    transform: [{rotate: '24.63deg'}],
+  },
+
+  BackgroundLogo2: {
+    position: 'absolute',
+    top: '75%',
+    right: '5%',
+    transform: [{rotate: '-10.31deg'}],
+  },
+
+  BackgroundLogo3: {
+    position: 'absolute',
+    top: '55%',
+    left: '23%',
+    transform: [{rotate: '24.63deg'}],
+  },
+
+  BackgroundLogo4: {
+    position: 'absolute',
+    top: '45%',
+    right: '15%',
+    transform: [{rotate: '-37.51deg'}],
+  },
+
+  BackgroundLogo5: {
+    position: 'absolute',
+    top: '30%',
+    left: '18%',
+    transform: [{rotate: '-23.64deg'}],
+  },
 });
 
 export default styles;

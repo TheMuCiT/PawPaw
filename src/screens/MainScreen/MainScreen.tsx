@@ -6,6 +6,9 @@ import styles from './styles';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import {format, intervalToDuration} from 'date-fns';
 
+//files
+import {usePetContext} from '../../contexts/PetContext';
+
 //assets
 
 import Logo from '../../assets/icons/Logo';
@@ -16,10 +19,12 @@ import ArrowRight from '../../assets/icons/ArrowRight';
 import RandomDog from '../../assets/images/randomDog.png';
 
 const MainScreen = () => {
+  const {count} = usePetContext();
+
   const {height, width} = useWindowDimensions();
   const [petName, setPetName] = useState<string>('');
   const [age, setAge] = useState(new Date());
-  const [image, setImage] = useState<string>('');
+  const [image, setImage] = useState<string | undefined>('');
 
   const [years, setYears] = useState(0);
   const [months, setMonths] = useState(0);
@@ -36,8 +41,9 @@ const MainScreen = () => {
 
         const imageResult = await AsyncStorage.getItem('image');
         if (imageResult) {
-          console.log(imageResult);
           setImage('data:image/png;base64,' + imageResult);
+        } else {
+          setImage(undefined);
         }
       } catch (e) {
         Alert.alert('Error ', (e as Error).message);
@@ -45,7 +51,7 @@ const MainScreen = () => {
     };
 
     ReadData();
-  }, []);
+  }, [count]);
 
   useEffect(() => {
     let timeNow = new Date();
@@ -65,6 +71,7 @@ const MainScreen = () => {
         source={image ? {uri: image} : RandomDog}
         style={[styles.BCImage, {width: width, height: height}]}
       />
+      <View style={[styles.imageCover, {width: width, height: height}]} />
       <View style={styles.logo}>
         <Logo />
         <Text style={styles.name}>{petName}</Text>

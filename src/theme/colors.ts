@@ -51,6 +51,21 @@ const colors = {
    * @param placeholder white  FFFFFF
    */
   white: '#FFFFFF',
+
+  /**
+   * @param placeholder white  FFFFFF
+   */
+  tabBarBottomActiveColor: '#B91010',
+
+  /**
+   * @param placeholder white  FFFFFF
+   */
+  tabBarBottomInactiveColor: '#D9D9D9',
+
+  /**
+   * @param placeholder white  FFFFFF
+   */
+  imageCover: '#00000070',
 };
 
 export default colors;

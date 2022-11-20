@@ -1,5 +1,5 @@
 import {View, Text, TextInput, Pressable, Image, Alert} from 'react-native';
-import {useState} from 'react';
+import {useEffect, useState} from 'react';
 import styles from './styles';
 
 //library
@@ -10,11 +10,17 @@ import DatePicker from 'react-native-date-picker';
 import {launchImageLibrary} from 'react-native-image-picker';
 import colors from '../../theme/colors';
 
+//files
+import {usePetContext} from '../../contexts/PetContext';
+
 //assets
 import AddImageIcon from '../../assets/icons/AddImageIcon';
 import Calendar from '../../assets/icons/Calendar';
+import BackgroundLogo from '../../assets/icons/BackgroundLogo';
 
 const NewPetScreen = () => {
+  const {count, updateCount} = usePetContext();
+
   const [petName, setPetName] = useState('');
   const [breed, setBreed] = useState('');
 
@@ -47,8 +53,9 @@ const NewPetScreen = () => {
   const saveImage = async () => {
     try {
       if (imageBase) {
-        console.log(imageBase);
         await AsyncStorage.setItem('image', imageBase);
+      } else {
+        await AsyncStorage.removeItem('image');
       }
     } catch (e) {
       Alert.alert('Error ', (e as Error).message);
@@ -62,6 +69,7 @@ const NewPetScreen = () => {
       await AsyncStorage.setItem('age', format(age, 'yyyy-MM-dd'));
       await AsyncStorage.setItem('note', note);
       await saveImage();
+      updateCount(count + 1);
     } catch (e) {
       Alert.alert('Error ', (e as Error).message);
     }
@@ -75,6 +83,12 @@ const NewPetScreen = () => {
         end={{x: 1, y: 1}}
         locations={[0.0, 0.8]}
         colors={[colors.bcMain, colors.bcMainSecond]}>
+        <BackgroundLogo style={styles.BackgroundLogo1} />
+        <BackgroundLogo style={styles.BackgroundLogo2} />
+        <BackgroundLogo style={styles.BackgroundLogo3} />
+        <BackgroundLogo style={styles.BackgroundLogo4} />
+        <BackgroundLogo style={styles.BackgroundLogo5} />
+
         <Pressable onPress={() => launchImagePicker()} style={styles.AddImage}>
           {image === undefined ? (
             <>

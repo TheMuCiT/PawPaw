@@ -1,9 +1,12 @@
-import LoadingScreen from './src/screens/LoadingScreen/LoadingScreen';
-import MainScreen from './src/screens/MainScreen/MainScreen';
-import NewPetScreen from './src/screens/NewPetScreen/NewPetScreen';
+import PetContextProvider from './src/contexts/PetContext';
+import Navigation from './src/navigation';
 
 const App = () => {
-  return <NewPetScreen />;
+  return (
+    <PetContextProvider>
+      <Navigation />
+    </PetContextProvider>
+  );
 };
 
 export default App;

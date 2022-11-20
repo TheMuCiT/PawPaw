@@ -16,6 +16,13 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     resizeMode: 'cover',
   },
+  imageCover: {
+    position: 'absolute',
+    flex: 1,
+    justifyContent: 'center',
+    resizeMode: 'cover',
+    backgroundColor: colors.imageCover,
+  },
   logo: {
     top: '15%',
     alignItems: 'center',
