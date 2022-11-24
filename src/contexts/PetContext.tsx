@@ -38,7 +38,7 @@ const PetContextProvider = ({children}: {children: ReactNode}) => {
 
   const updateCount = async (newCount: number) => {
     setCount(newCount);
-    //await AsyncStorage.setItem('pawpaw_Pet_Count', newCount);
+    await AsyncStorage.setItem('pawpaw_Pet_Count', newCount.toString());
   };
 
   useEffect(() => {

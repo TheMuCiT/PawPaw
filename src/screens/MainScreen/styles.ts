@@ -83,14 +83,21 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     marginRight: sizes.padding.mainInfoIcon,
     width: sizes.padding.mainInfoArrowSize,
-    opacity: 0.3,
+    opacity: 0.7,
+  },
+  navigationLeftDisable: {
+    opacity: 0.2,
   },
 
   navigationRight: {
     alignItems: 'center',
     marginLeft: sizes.padding.mainInfoIcon,
     width: sizes.padding.mainInfoArrowSize,
-    opacity: 0.3,
+    opacity: 0.7,
+  },
+
+  navigationRightDisable: {
+    opacity: 0.2,
   },
   navigationText: {
     marginTop: sizes.padding.mainInfoText,

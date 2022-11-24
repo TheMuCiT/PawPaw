@@ -7,6 +7,10 @@ const bordersRadius = {
    * @param 7
    */
   button: 7,
+  /**
+   * @param 3
+   */
+  image: 3,
 };
 
 const borderWidth = {
@@ -34,9 +38,13 @@ const padding = {
   mainInfoArrowSize: 80,
   mainInfoIcon: 20,
   mainInfoText: 10,
+
+  listSearchTop: 20,
+  listItemPadding: 12,
 };
 
 const height = {
   input: 40,
+  inputNote: 80,
 };
 export default {bordersRadius, borderWidth, padding, height};

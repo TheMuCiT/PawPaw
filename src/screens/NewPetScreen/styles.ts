@@ -16,6 +16,7 @@ const styles = StyleSheet.create({
   },
   AddImage: {
     height: '30%',
+    minHeight: 150,
     width: '100%',
     alignItems: 'center',
     justifyContent: 'center',
@@ -29,9 +30,10 @@ const styles = StyleSheet.create({
   },
   InputsContainer: {
     width: '100%',
-    marginTop: 20,
   },
   Inputs: {
+    marginTop: 20,
+    marginBottom: 50,
     marginHorizontal: sizes.padding.mainHorizontal,
   },
 
@@ -49,6 +51,24 @@ const styles = StyleSheet.create({
 
     fontSize: fonts.size.sm,
     fontFamily: fonts.family.regular,
+  },
+
+  a: {
+    borderRadius: sizes.bordersRadius.input,
+    borderColor: colors.border,
+    borderWidth: sizes.borderWidth.input,
+    backgroundColor: colors.inputBC,
+    paddingHorizontal: sizes.padding.inputHorizontal,
+    placeholderTextColor: 'red',
+    marginBottom: sizes.padding.inputBottom,
+  },
+
+  InputElementNote: {
+    color: colors.main,
+    fontSize: fonts.size.sm,
+    fontFamily: fonts.family.regular,
+    maxHeight: 200,
+    textAlignVertical: 'top',
   },
 
   InputElementDate: {
@@ -120,6 +140,12 @@ const styles = StyleSheet.create({
     top: '30%',
     left: '18%',
     transform: [{rotate: '-23.64deg'}],
+  },
+
+  BackButton: {
+    position: 'absolute',
+    top: '3%',
+    left: '5%',
   },
 });
 

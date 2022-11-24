@@ -1,13 +1,21 @@
 import {useEffect, useState} from 'react';
-import {View, Text, Image, useWindowDimensions, Alert} from 'react-native';
+import {
+  View,
+  Text,
+  Image,
+  useWindowDimensions,
+  ActivityIndicator,
+  Pressable,
+} from 'react-native';
 import styles from './styles';
 
 //library
-import AsyncStorage from '@react-native-async-storage/async-storage';
 import {format, intervalToDuration} from 'date-fns';
 
 //files
 import {usePetContext} from '../../contexts/PetContext';
+import useMainScreenService from '../../services/MainService';
+import {IPetData} from '../../types/AppTypes';
 
 //assets
 
@@ -20,64 +28,73 @@ import RandomDog from '../../assets/images/randomDog.png';
 
 const MainScreen = () => {
   const {count} = usePetContext();
+  const {ReadData} = useMainScreenService();
 
   const {height, width} = useWindowDimensions();
-  const [petName, setPetName] = useState<string>('');
-  const [age, setAge] = useState(new Date());
-  const [image, setImage] = useState<string | undefined>('');
+
+  const [petData, setPetData] = useState<Array<IPetData>>([]);
+
+  const [activePet, setActivePet] = useState<number>(0);
+
+  const pet = petData[activePet];
 
   const [years, setYears] = useState(0);
   const [months, setMonths] = useState(0);
   const [days, setDays] = useState(0);
 
   useEffect(() => {
-    const ReadData = async () => {
-      try {
-        const result = await AsyncStorage.getItem('petName');
-        if (result) setPetName(result);
-
-        const ageString = await AsyncStorage.getItem('age');
-        setAge(new Date(ageString ? ageString : ''));
-
-        const imageResult = await AsyncStorage.getItem('image');
-        if (imageResult) {
-          setImage('data:image/png;base64,' + imageResult);
-        } else {
-          setImage(undefined);
-        }
-      } catch (e) {
-        Alert.alert('Error ', (e as Error).message);
-      }
+    const callData = async () => {
+      const result = await ReadData();
+      setPetData(result);
     };
 
-    ReadData();
+    callData();
   }, [count]);
 
   useEffect(() => {
+    if (!pet) {
+      return;
+    }
     let timeNow = new Date();
 
-    let time = intervalToDuration({start: age, end: timeNow});
+    let time = intervalToDuration({start: pet.age, end: timeNow});
 
     setYears(time.years ? time.years : 0);
 
     setMonths(time.months ? time.months : 0);
 
     setDays(time.days ? time.days : 0);
-  }, [age]);
+  }, [pet]);
+
+  if (!pet) {
+    return <ActivityIndicator />;
+  }
+
+  const Previous = () => {
+    if (activePet > 0) {
+      setActivePet(activePet - 1);
+    }
+  };
+
+  const Next = () => {
+    if (activePet < count - 1) {
+      setActivePet(activePet + 1);
+    }
+  };
 
   return (
     <View style={styles.page}>
       <Image
-        source={image ? {uri: image} : RandomDog}
+        source={pet.image ? {uri: pet.image} : RandomDog}
         style={[styles.BCImage, {width: width, height: height}]}
       />
       <View style={[styles.imageCover, {width: width, height: height}]} />
       <View style={styles.logo}>
         <Logo />
-        <Text style={styles.name}>{petName}</Text>
+        <Text style={styles.name}>{pet.name}</Text>
       </View>
       <View style={styles.bDay}>
-        <Text style={styles.bDayText}>{format(age, 'MMMM do')}</Text>
+        <Text style={styles.bDayText}>{format(pet.age, 'MMMM do')}</Text>
       </View>
       <View style={styles.timer}>
         <View style={styles.timerBox}>
@@ -94,17 +111,27 @@ const MainScreen = () => {
         </View>
       </View>
       <View style={styles.navigation}>
-        <View style={styles.navigationLeft}>
+        <Pressable
+          onPress={() => Previous()}
+          style={[
+            styles.navigationLeft,
+            activePet === 0 && styles.navigationLeftDisable,
+          ]}>
           <ArrowLeft />
           <Text style={styles.navigationText}>PREVIOUS</Text>
-        </View>
+        </Pressable>
         <View>
           <Info />
         </View>
-        <View style={styles.navigationRight}>
+        <Pressable
+          onPress={() => Next()}
+          style={[
+            styles.navigationRight,
+            activePet === count - 1 && styles.navigationLeftDisable,
+          ]}>
           <ArrowRight />
           <Text style={styles.navigationText}>NEXT</Text>
-        </View>
+        </Pressable>
       </View>
     </View>
   );

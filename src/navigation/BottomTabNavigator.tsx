@@ -6,15 +6,16 @@ import {BottomTabNavigatorParamList} from '../types/navigation';
 import colors from '../theme/colors';
 
 //Screens
-import MainScreen from '../screens/MainScreen/MainScreen';
-import LoadingScreen from '../screens/LoadingScreen/LoadingScreen';
-import NewPetScreen from '../screens/NewPetScreen/NewPetScreen';
+import MainScreen from '../screens/MainScreen';
+import LoadingScreen from '../screens/LoadingScreen';
+import NewPetScreen from '../screens/NewPetScreen';
 
 //assets
 import HomeIcon from '../assets/icons/HomeIcon';
 import PetListIcon from '../assets/icons/PetListIcon';
 import PetAddIcon from '../assets/icons/PetAddIcon';
 import SettingsIcon from '../assets/icons/SettingsIcon';
+import PetListScreen from '../screens/PetListScreen';
 
 const Tab = createBottomTabNavigator<BottomTabNavigatorParamList>();
 
@@ -31,6 +32,7 @@ const BottomTabNavigator = () => {
           borderTopWidth: 0,
           borderRadius: 13,
           position: 'absolute',
+          elevation: 0,
           left: 10,
           right: 10,
           bottom: 15,
@@ -47,7 +49,7 @@ const BottomTabNavigator = () => {
       />
       <Tab.Screen
         name="PetList"
-        component={LoadingScreen}
+        component={PetListScreen}
         options={{
           headerShown: false,
           tabBarIcon: ({color}) => <PetListIcon color={color} />,

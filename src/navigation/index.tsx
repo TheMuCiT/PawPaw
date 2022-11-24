@@ -10,8 +10,8 @@ import BottomTabNavigator from './BottomTabNavigator';
 import {usePetContext} from '../contexts/PetContext';
 
 //screen
-import LoadingScreen from '../screens/LoadingScreen/LoadingScreen';
-import NewPetScreen from '../screens/NewPetScreen/NewPetScreen';
+import LoadingScreen from '../screens/LoadingScreen';
+import NewPetScreen from '../screens/NewPetScreen';
 
 const Stack = createNativeStackNavigator<RootNavigatorParamList>();
 

@@ -1,5 +1,13 @@
-import {View, Text, TextInput, Pressable, Image, Alert} from 'react-native';
-import {useEffect, useState} from 'react';
+import {
+  View,
+  Text,
+  TextInput,
+  Pressable,
+  Image,
+  Alert,
+  ScrollView,
+} from 'react-native';
+import {useState} from 'react';
 import styles from './styles';
 
 //library
@@ -8,18 +16,22 @@ import LinearGradient from 'react-native-linear-gradient';
 import {format} from 'date-fns';
 import DatePicker from 'react-native-date-picker';
 import {launchImageLibrary} from 'react-native-image-picker';
-import colors from '../../theme/colors';
 
 //files
 import {usePetContext} from '../../contexts/PetContext';
+import colors from '../../theme/colors';
+
+import useNewPetService from '../../services/NewPetService';
 
 //assets
 import AddImageIcon from '../../assets/icons/AddImageIcon';
 import Calendar from '../../assets/icons/Calendar';
 import BackgroundLogo from '../../assets/icons/BackgroundLogo';
+import Back from '../../assets/icons/Back';
 
 const NewPetScreen = () => {
   const {count, updateCount} = usePetContext();
+  const {validateInput, saveImage} = useNewPetService();
 
   const [petName, setPetName] = useState('');
   const [breed, setBreed] = useState('');
@@ -32,6 +44,9 @@ const NewPetScreen = () => {
 
   const [image, setImage] = useState<undefined | string>(undefined);
   const [imageBase, setImageBase] = useState<undefined | string>(undefined);
+
+  const [valid, setValid] = useState<boolean | null>(null);
+  const [loading, setLoading] = useState(false);
 
   const launchImagePicker = async () => {
     const result = await launchImageLibrary({
@@ -50,29 +65,23 @@ const NewPetScreen = () => {
     }
   };
 
-  const saveImage = async () => {
-    try {
-      if (imageBase) {
-        await AsyncStorage.setItem('image', imageBase);
-      } else {
-        await AsyncStorage.removeItem('image');
-      }
-    } catch (e) {
-      Alert.alert('Error ', (e as Error).message);
-    }
-  };
-
   const saveData = async () => {
-    try {
-      await AsyncStorage.setItem('petName', petName);
-      await AsyncStorage.setItem('breed', breed);
-      await AsyncStorage.setItem('age', format(age, 'yyyy-MM-dd'));
-      await AsyncStorage.setItem('note', note);
-      await saveImage();
-      updateCount(count + 1);
-    } catch (e) {
-      Alert.alert('Error ', (e as Error).message);
+    setLoading(true);
+    let response = validateInput(petName, breed, age);
+    setValid(v => response);
+    if (response) {
+      try {
+        await AsyncStorage.setItem(`petName${count}`, petName);
+        await AsyncStorage.setItem(`breed${count}`, breed);
+        await AsyncStorage.setItem(`age${count}`, format(age, 'yyyy-MM-dd'));
+        await AsyncStorage.setItem(`note${count}`, note);
+        await saveImage(imageBase, count);
+        updateCount(count + 1);
+      } catch (e) {
+        Alert.alert('Error ', (e as Error).message);
+      }
     }
+    setLoading(false);
   };
 
   return (
@@ -107,7 +116,7 @@ const NewPetScreen = () => {
           )}
         </Pressable>
 
-        <View style={styles.InputsContainer}>
+        <ScrollView style={styles.InputsContainer}>
           <View style={styles.Inputs}>
             <TextInput
               style={styles.InputElement}
@@ -115,6 +124,7 @@ const NewPetScreen = () => {
               placeholder={'What’s your pet’s name'}
               onChangeText={setPetName}
               placeholderTextColor={colors.inputPlaceholder}
+              maxLength={20}
             />
             <TextInput
               style={styles.InputElement}
@@ -122,6 +132,7 @@ const NewPetScreen = () => {
               placeholder={'What’s your pet’s breed'}
               onChangeText={setBreed}
               placeholderTextColor={colors.inputPlaceholder}
+              maxLength={20}
             />
 
             <Pressable
@@ -152,20 +163,31 @@ const NewPetScreen = () => {
               />
             </Pressable>
 
-            <TextInput
-              style={styles.InputElement}
-              value={note}
-              placeholder={'Notes about your pet'}
-              onChangeText={setNote}
-              placeholderTextColor={colors.inputPlaceholder}
-              editable={false}
-            />
+            <View style={styles.a}>
+              <TextInput
+                style={[styles.InputElementNote]}
+                value={note}
+                multiline
+                placeholder={'Notes about your pet'}
+                onChangeText={setNote}
+                placeholderTextColor={colors.inputPlaceholder}
+                numberOfLines={4}
+                maxLength={120}
+              />
+            </View>
 
             <Pressable onPress={saveData} style={styles.Button}>
-              <Text style={styles.ButtonText}>save and continue</Text>
+              <Text style={styles.ButtonText}>
+                {loading
+                  ? 'Loading'
+                  : valid === false
+                  ? 'Input is not valid try again'
+                  : 'save and continue'}
+              </Text>
             </Pressable>
           </View>
-        </View>
+        </ScrollView>
+        {count > 0 && <Back style={styles.BackButton} />}
       </LinearGradient>
     </View>
   );
