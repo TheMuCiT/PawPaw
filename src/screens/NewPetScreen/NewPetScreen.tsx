@@ -27,7 +27,6 @@ import useNewPetService from '../../services/NewPetService';
 import AddImageIcon from '../../assets/icons/AddImageIcon';
 import Calendar from '../../assets/icons/Calendar';
 import BackgroundLogo from '../../assets/icons/BackgroundLogo';
-import Back from '../../assets/icons/Back';
 
 const NewPetScreen = () => {
   const {count, updateCount} = usePetContext();
@@ -65,6 +64,14 @@ const NewPetScreen = () => {
     }
   };
 
+  const updatePage = () => {
+    setPetName('');
+    setBreed('');
+    setShowDate(false);
+    setImage(undefined);
+    setNote('');
+  };
+
   const saveData = async () => {
     setLoading(true);
     let response = validateInput(petName, breed, age);
@@ -77,6 +84,7 @@ const NewPetScreen = () => {
         await AsyncStorage.setItem(`note${count}`, note);
         await saveImage(imageBase, count);
         updateCount(count + 1);
+        updatePage();
       } catch (e) {
         Alert.alert('Error ', (e as Error).message);
       }
@@ -187,7 +195,6 @@ const NewPetScreen = () => {
             </Pressable>
           </View>
         </ScrollView>
-        {count > 0 && <Back style={styles.BackButton} />}
       </LinearGradient>
     </View>
   );

@@ -1,5 +1,5 @@
 import {useState} from 'react';
-import {Alert, Image} from 'react-native';
+import {Alert} from 'react-native';
 
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
@@ -31,7 +31,7 @@ const useMainScreenService = () => {
           image = undefined;
         }
 
-        petData.push({name, breed: '', age, image: ''});
+        petData.push({name, breed: '', age, image});
       } catch (e) {
         Alert.alert('Error ', (e as Error).message);
       }

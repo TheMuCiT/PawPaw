@@ -46,7 +46,9 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     paddingHorizontal: sizes.padding.inputHorizontal,
   },
-  searchText: {},
+  searchText: {
+    width: '90%',
+  },
 
   list: {
     marginTop: 20,
