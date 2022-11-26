@@ -1,4 +1,9 @@
 {
   "name": "PAWPAWTracker",
-  "displayName": "PAWPAWTracker"
+  "displayName": "PAWPAWTracker",
+  "extra": {
+    "eas": {
+      "projectId": "578b851b-31db-42dd-a765-34a3910534ed"
+    }
+  }
 }
