@@ -1,13 +1,14 @@
 {
   "name": "pawpawtracker",
-  "version": "1.0.2",
+  "version": "1.0.1",
   "private": true,
   "scripts": {
     "android": "react-native run-android",
     "ios": "react-native run-ios",
     "start": "react-native start",
     "test": "jest",
-    "lint": "eslint . --ext .js,.jsx,.ts,.tsx"
+    "lint": "eslint . --ext .js,.jsx,.ts,.tsx",
+    "postversion": "npx react-native-version --never-amend"
   },
   "dependencies": {
     "@react-native-async-storage/async-storage": "^1.17.11",
