@@ -1,6 +1,10 @@
-import {View, Text, Image} from 'react-native';
+import {View, Text, Image, Pressable} from 'react-native';
 import styles from './styles';
 
+//files
+import usePetManageService from '../../services/PetManageService/PetManageService';
+
+//assets
 import Edit from '../../assets/icons/Edit';
 import randomDog from '../../assets/images/randomDog.png';
 import {IPetData} from '../../types/AppTypes';
@@ -10,6 +14,18 @@ interface IPet {
 }
 
 const PetList = ({pet}: IPet) => {
+  const {EditPet, DeletePet} = usePetManageService();
+
+  const deleteItem = () => {
+    console.warn('delete');
+    DeletePet(pet.id);
+  };
+
+  const EditItem = () => {
+    console.warn('edit');
+    EditPet(pet.id);
+  };
+
   return (
     <View style={styles.item}>
       <View style={styles.left}>
@@ -22,11 +38,16 @@ const PetList = ({pet}: IPet) => {
           <Text style={styles.petAge}>5 Months old</Text>
         </View>
       </View>
-      <View style={styles.right}>
+      <Pressable onPress={EditItem} style={styles.right}>
         <View style={styles.edit}>
           <Edit />
         </View>
-      </View>
+        <Pressable
+          onPress={deleteItem}
+          style={[styles.edit, {backgroundColor: 'red'}]}>
+          <Edit />
+        </Pressable>
+      </Pressable>
     </View>
   );
 };
