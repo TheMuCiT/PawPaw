@@ -13,7 +13,11 @@ const styles = StyleSheet.create({
   left: {
     flexDirection: 'row',
   },
-  right: {alignItems: 'center', justifyContent: 'center'},
+  right: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
   imageIMG: {
     width: 50,
     height: 44,
@@ -30,7 +34,9 @@ const styles = StyleSheet.create({
     fontSize: fonts.size.xxs,
     color: colors.white,
   },
-  edit: {},
+  edit: {
+    marginLeft: 8,
+  },
 });
 
 export default styles;

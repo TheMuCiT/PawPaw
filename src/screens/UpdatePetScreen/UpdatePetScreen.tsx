@@ -7,8 +7,8 @@ import {
   Alert,
   ScrollView,
 } from 'react-native';
-import {useState} from 'react';
-import styles from './styles';
+import {useEffect, useState} from 'react';
+import styles from '../NewPetScreen/styles';
 
 //library
 import AsyncStorage from '@react-native-async-storage/async-storage';
@@ -16,21 +16,28 @@ import LinearGradient from 'react-native-linear-gradient';
 import {format} from 'date-fns';
 import DatePicker from 'react-native-date-picker';
 import {launchImageLibrary} from 'react-native-image-picker';
+import {useNavigation, useRoute} from '@react-navigation/native';
 
 //files
-import {usePetContext} from '../../contexts/PetContext';
 import colors from '../../theme/colors';
-
+import {
+  UpdatePetNavigatorProp,
+  UpdatePetRouteProp,
+} from '../../types/navigation';
 import useNewPetService from '../../services/NewPetService';
 
 //assets
 import AddImageIcon from '../../assets/icons/AddImageIcon';
 import Calendar from '../../assets/icons/Calendar';
 import BackgroundLogo from '../../assets/icons/BackgroundLogo';
+import {usePetContext} from '../../contexts/PetContext';
 
-const NewPetScreen = () => {
-  const {count, updateCount} = usePetContext();
+const UpdatePetScreen = () => {
+  const route = useRoute<UpdatePetRouteProp>();
+  const {id} = route.params;
+  const navigation = useNavigation<UpdatePetNavigatorProp>();
   const {validateInput, saveImage} = useNewPetService();
+  const {count, updateCount} = usePetContext();
 
   const [petName, setPetName] = useState<string>('');
   const [breed, setBreed] = useState<string>('');
@@ -65,32 +72,54 @@ const NewPetScreen = () => {
   };
 
   const updatePage = () => {
-    setPetName('');
-    setBreed('');
-    setShowDate(false);
-    setImage(undefined);
-    setNote('');
+    navigation.goBack();
   };
 
-  const saveData = async () => {
+  const updateData = async () => {
     setLoading(true);
+    let x = count;
+    updateCount(x - 1);
     let response = validateInput(petName, breed, age);
     setValid(v => response);
     if (response) {
       try {
-        await AsyncStorage.setItem(`petName${count}`, petName);
-        await AsyncStorage.setItem(`breed${count}`, breed);
-        await AsyncStorage.setItem(`age${count}`, format(age, 'yyyy-MM-dd'));
-        await AsyncStorage.setItem(`note${count}`, note);
-        await saveImage(imageBase, count);
-        updateCount(count + 1);
+        await AsyncStorage.setItem(`petName${id}`, petName);
+        await AsyncStorage.setItem(`breed${id}`, breed);
+        await AsyncStorage.setItem(`age${id}`, format(age, 'yyyy-MM-dd'));
+        await AsyncStorage.setItem(`note${id}`, note);
+        await saveImage(imageBase, id);
         updatePage();
+        updateCount(x);
       } catch (e) {
         Alert.alert('Error ', (e as Error).message);
       }
     }
     setLoading(false);
   };
+
+  const readData = async () => {
+    const petName = await AsyncStorage.getItem(`petName${id}`);
+    const petAge = await AsyncStorage.getItem(`age${id}`);
+    const petImage = await AsyncStorage.getItem(`image${id}`);
+    const petBreed = await AsyncStorage.getItem(`breed${id}`);
+    const petNote = await AsyncStorage.getItem(`note${id}`);
+
+    return {petName, petAge, petImage, petBreed, petNote};
+  };
+
+  useEffect(() => {
+    const callData = async () => {
+      const result = await readData();
+      setPetName(result.petName || '');
+      setBreed(result.petBreed || '');
+      setShowDate(true);
+      setAge(new Date(result.petAge || ''));
+      setImage(result.petImage || undefined);
+      setNote(result.petNote || '');
+    };
+
+    callData();
+  }, [id]);
 
   return (
     <View style={styles.page}>
@@ -114,7 +143,7 @@ const NewPetScreen = () => {
             </>
           ) : (
             <Image
-              source={{uri: image}}
+              source={{uri: 'data:image/png;base64,' + image}}
               style={{
                 width: '100%',
                 height: '100%',
@@ -184,7 +213,7 @@ const NewPetScreen = () => {
               />
             </View>
 
-            <Pressable onPress={saveData} style={styles.Button}>
+            <Pressable onPress={updateData} style={styles.Button}>
               <Text style={styles.ButtonText}>
                 {loading
                   ? 'Loading'
@@ -200,4 +229,4 @@ const NewPetScreen = () => {
   );
 };
 
-export default NewPetScreen;
+export default UpdatePetScreen;

@@ -16,6 +16,7 @@ import PetListIcon from '../assets/icons/PetListIcon';
 import PetAddIcon from '../assets/icons/PetAddIcon';
 import SettingsIcon from '../assets/icons/SettingsIcon';
 import PetListScreen from '../screens/PetListScreen';
+import PetListStackNavigator from './PetListStackNavigator';
 
 const Tab = createBottomTabNavigator<BottomTabNavigatorParamList>();
 
@@ -48,8 +49,8 @@ const BottomTabNavigator = () => {
         }}
       />
       <Tab.Screen
-        name="PetList"
-        component={PetListScreen}
+        name="PetListStack"
+        component={PetListStackNavigator}
         options={{
           headerShown: false,
           tabBarIcon: ({color}) => <PetListIcon color={color} />,

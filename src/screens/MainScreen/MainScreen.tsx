@@ -48,6 +48,9 @@ const MainScreen = () => {
       setPetData(result);
     };
 
+    if (activePet > count - 1) {
+      setActivePet(count - 1);
+    }
     callData();
   }, [count]);
 
