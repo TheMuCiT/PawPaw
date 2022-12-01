@@ -1,5 +1,6 @@
-import {View, Text, Image, Pressable} from 'react-native';
+import {View, Text, Image, Pressable, Alert} from 'react-native';
 import styles from './styles';
+import {useNavigation} from '@react-navigation/native';
 
 //files
 import usePetManageService from '../../services/PetManageService/PetManageService';
@@ -8,22 +9,31 @@ import usePetManageService from '../../services/PetManageService/PetManageServic
 import Edit from '../../assets/icons/Edit';
 import randomDog from '../../assets/images/randomDog.png';
 import {IPetData} from '../../types/AppTypes';
+import {PetListNavigatorProp} from '../../types/navigation';
 
 interface IPet {
   pet: IPetData;
 }
 
 const PetList = ({pet}: IPet) => {
-  const {EditPet, DeletePet} = usePetManageService();
+  const navigation = useNavigation<PetListNavigatorProp>();
+  const {DeletePet} = usePetManageService();
 
   const deleteItem = () => {
-    console.warn('delete');
-    DeletePet(pet.id);
+    Alert.alert('Warning', `Do you really want to delete ${pet.name}?`, [
+      {
+        text: 'Cancel',
+        style: 'cancel',
+      },
+      {
+        text: 'OK',
+        onPress: () => DeletePet(pet.id),
+      },
+    ]);
   };
 
   const EditItem = () => {
-    console.warn('edit');
-    EditPet(pet.id);
+    navigation.navigate('UpdateItem', {id: pet.id});
   };
 
   return (

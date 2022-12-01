@@ -7,8 +7,6 @@ import {usePetContext} from '../../contexts/PetContext';
 const usePetManageService = () => {
   const {count, updateCount} = usePetContext();
 
-  const EditPet = (id: number) => {};
-
   const DeletePet = async (id: number) => {
     if (count - 1 === id) {
       updateCount(count - 1);
@@ -32,7 +30,7 @@ const usePetManageService = () => {
     }
   };
 
-  return {EditPet, DeletePet};
+  return {DeletePet};
 };
 
 export default usePetManageService;
