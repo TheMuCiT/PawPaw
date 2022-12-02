@@ -45,6 +45,7 @@ const styles = StyleSheet.create({
     justifyContent: 'space-between',
     alignItems: 'center',
     paddingHorizontal: sizes.padding.inputHorizontal,
+    display: 'none',
   },
   searchText: {
     width: '90%',
