@@ -171,7 +171,7 @@ const NewPetScreen = () => {
               />
             </Pressable>
 
-            <View style={styles.a}>
+            <View style={styles.NodeInput}>
               <TextInput
                 style={[styles.InputElementNote]}
                 value={note}

@@ -7,6 +7,7 @@ import usePetManageService from '../../services/PetManageService/PetManageServic
 
 //assets
 import Edit from '../../assets/icons/Edit';
+import Delete from '../../assets/icons/DeletePet';
 import randomDog from '../../assets/images/randomDog.png';
 import {IPetData} from '../../types/AppTypes';
 import {PetListNavigatorProp} from '../../types/navigation';
@@ -52,10 +53,8 @@ const PetList = ({pet}: IPet) => {
         <View style={styles.edit}>
           <Edit />
         </View>
-        <Pressable
-          onPress={deleteItem}
-          style={[styles.edit, {backgroundColor: 'red'}]}>
-          <Edit />
+        <Pressable onPress={deleteItem} style={styles.edit}>
+          <Delete />
         </Pressable>
       </Pressable>
     </View>

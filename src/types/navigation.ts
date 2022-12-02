@@ -10,13 +10,18 @@ export type BottomTabNavigatorParamList = {
   HomeStack: undefined;
   PetListStack: undefined;
   AddPet: undefined;
-  Settings: undefined;
+  ViewPet: {id: number};
 };
 
 export type PetListStackNavigatorParamList = {
   PetList: undefined;
   UpdateItem: {id: number};
 };
+
+export type MainScreenNavigatorProp = NativeStackNavigationProp<
+  BottomTabNavigatorParamList,
+  'HomeStack'
+>;
 
 export type PetListNavigatorProp = NativeStackNavigationProp<
   PetListStackNavigatorParamList,
@@ -31,4 +36,9 @@ export type UpdatePetNavigatorProp = NativeStackNavigationProp<
 export type UpdatePetRouteProp = RouteProp<
   PetListStackNavigatorParamList,
   'UpdateItem'
+>;
+
+export type ViewPetRouteProp = RouteProp<
+  BottomTabNavigatorParamList,
+  'ViewPet'
 >;

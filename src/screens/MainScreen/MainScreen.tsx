@@ -16,6 +16,8 @@ import {format, intervalToDuration} from 'date-fns';
 import {usePetContext} from '../../contexts/PetContext';
 import useMainScreenService from '../../services/MainService';
 import {IPetData} from '../../types/AppTypes';
+import {useNavigation} from '@react-navigation/native';
+import {MainScreenNavigatorProp} from '../../types/navigation';
 
 //assets
 
@@ -27,6 +29,8 @@ import ArrowRight from '../../assets/icons/ArrowRight';
 import RandomDog from '../../assets/images/randomDog.png';
 
 const MainScreen = () => {
+  const navigation = useNavigation<MainScreenNavigatorProp>();
+
   const {count} = usePetContext();
   const {ReadData} = useMainScreenService();
 
@@ -85,6 +89,10 @@ const MainScreen = () => {
     }
   };
 
+  const NavigateToView = () => {
+    navigation.navigate('ViewPet', {id: pet.id});
+  };
+
   return (
     <View style={styles.page}>
       <Image
@@ -123,9 +131,9 @@ const MainScreen = () => {
           <ArrowLeft />
           <Text style={styles.navigationText}>PREVIOUS</Text>
         </Pressable>
-        <View>
+        <Pressable onPress={NavigateToView}>
           <Info />
-        </View>
+        </Pressable>
         <Pressable
           onPress={() => Next()}
           style={[

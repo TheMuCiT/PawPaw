@@ -53,7 +53,7 @@ const styles = StyleSheet.create({
     fontFamily: fonts.family.regular,
   },
 
-  a: {
+  NodeInput: {
     borderRadius: sizes.bordersRadius.input,
     borderColor: colors.border,
     borderWidth: sizes.borderWidth.input,
