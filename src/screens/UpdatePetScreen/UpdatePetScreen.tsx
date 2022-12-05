@@ -25,12 +25,13 @@ import {
   UpdatePetRouteProp,
 } from '../../types/navigation';
 import useNewPetService from '../../services/NewPetService';
+import {usePetContext} from '../../contexts/PetContext';
 
 //assets
 import AddImageIcon from '../../assets/icons/AddImageIcon';
 import Calendar from '../../assets/icons/Calendar';
 import BackgroundLogo from '../../assets/icons/BackgroundLogo';
-import {usePetContext} from '../../contexts/PetContext';
+import Back from '../../assets/icons/Back';
 
 const UpdatePetScreen = () => {
   const route = useRoute<UpdatePetRouteProp>();
@@ -224,6 +225,12 @@ const UpdatePetScreen = () => {
             </Pressable>
           </View>
         </ScrollView>
+        {image !== undefined && <View style={styles.BackImageHover}></View>}
+        <Pressable
+          onPress={() => navigation.goBack()}
+          style={styles.BackButton}>
+          <Back />
+        </Pressable>
       </LinearGradient>
     </View>
   );

@@ -15,7 +15,7 @@ const styles = StyleSheet.create({
     justifyContent: 'flex-start',
   },
   AddImage: {
-    height: '50%',
+    height: '40%',
     minHeight: 150,
     width: '100%',
     alignItems: 'center',
@@ -33,12 +33,15 @@ const styles = StyleSheet.create({
     marginTop: -50,
     borderRadius: 7,
     padding: 10,
+    alignItems: 'center',
+    justifyContent: 'center',
   },
 
   NameText: {
-    fontSize: fonts.size.md,
-    fontFamily: fonts.family.medium,
+    fontSize: fonts.size.xxlg,
+    fontFamily: fonts.family.semiBold,
     color: colors.white,
+    textTransform: 'uppercase',
   },
 
   DataContainer: {
@@ -59,7 +62,8 @@ const styles = StyleSheet.create({
   timer: {
     flexDirection: 'row',
     justifyContent: 'center',
-    marginTop: 25,
+    marginTop: 15,
+    marginBottom: 10,
   },
   timerBox: {
     width: sizes.padding.timer,

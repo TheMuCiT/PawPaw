@@ -23,6 +23,11 @@ export type MainScreenNavigatorProp = NativeStackNavigationProp<
   'HomeStack'
 >;
 
+export type NewPetScreenNavigatorProp = NativeStackNavigationProp<
+  BottomTabNavigatorParamList,
+  'AddPet'
+>;
+
 export type PetListNavigatorProp = NativeStackNavigationProp<
   PetListStackNavigatorParamList,
   'PetList'
