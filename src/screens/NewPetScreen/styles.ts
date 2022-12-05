@@ -147,6 +147,12 @@ const styles = StyleSheet.create({
     top: '3%',
     left: '5%',
   },
+  BackImageHover: {
+    position: 'absolute',
+    height: '30%',
+    width: '100%',
+    backgroundColor: '#00000070',
+  },
 });
 
 export default styles;

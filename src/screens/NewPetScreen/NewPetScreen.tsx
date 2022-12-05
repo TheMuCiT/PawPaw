@@ -16,11 +16,12 @@ import LinearGradient from 'react-native-linear-gradient';
 import {format} from 'date-fns';
 import DatePicker from 'react-native-date-picker';
 import {launchImageLibrary} from 'react-native-image-picker';
+import {useNavigation} from '@react-navigation/native';
 
 //files
 import {usePetContext} from '../../contexts/PetContext';
 import colors from '../../theme/colors';
-
+import {NewPetScreenNavigatorProp} from '../../types/navigation';
 import useNewPetService from '../../services/NewPetService';
 
 //assets
@@ -29,6 +30,7 @@ import Calendar from '../../assets/icons/Calendar';
 import BackgroundLogo from '../../assets/icons/BackgroundLogo';
 
 const NewPetScreen = () => {
+  const navigation = useNavigation<NewPetScreenNavigatorProp>();
   const {count, updateCount} = usePetContext();
   const {validateInput, saveImage} = useNewPetService();
 
@@ -85,6 +87,7 @@ const NewPetScreen = () => {
         await saveImage(imageBase, count);
         updateCount(count + 1);
         updatePage();
+        navigation.navigate('HomeStack');
       } catch (e) {
         Alert.alert('Error ', (e as Error).message);
       }
