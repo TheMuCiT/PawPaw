@@ -1,5 +1,8 @@
+import {useEffect, useRef, useState} from 'react';
+
 //library
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
+import * as Animatable from 'react-native-animatable';
 
 //Files
 import {BottomTabNavigatorParamList} from '../types/navigation';
@@ -16,8 +19,79 @@ import PetAddIcon from '../assets/icons/PetAddIcon';
 import SettingsIcon from '../assets/icons/SettingsIcon';
 import PetListStackNavigator from './PetListStackNavigator';
 import ViewPetScreen from '../screens/ViewPetScreen';
+import {StyleSheet, TouchableOpacity, View} from 'react-native';
 
 const Tab = createBottomTabNavigator<BottomTabNavigatorParamList>();
+
+const animate1 = {
+  0: {scale: 1, translateY: 0},
+  0.6: {translateY: -8},
+  1: {scale: 1.2, translateY: -2},
+};
+const animate2 = {
+  0: {scale: 1.2, translateY: -2},
+  1: {scale: 1, translateY: 0},
+};
+
+const lineAni1 = {
+  0: {width: 1},
+  1: {width: 20},
+};
+
+const lineAni2 = {
+  0: {width: 20},
+  1: {width: 0},
+};
+
+interface ITabButton {
+  item: string;
+  accessibilityState: any;
+}
+
+const TabButton = (props: ITabButton) => {
+  const {item, accessibilityState} = props;
+  const focused = accessibilityState.selected;
+  const viewRef = useRef<any>(null);
+  const lineRef = useRef<any>(null);
+
+  const [duration, setDuration] = useState(10);
+
+  const activeColor = colors.tabBarBottomActiveColor;
+  const InactiveColor = colors.tabBarBottomInactiveColor;
+
+  useEffect(() => {
+    if (focused) {
+      viewRef.current.animate(animate1);
+      lineRef.current.animate(lineAni1);
+    } else {
+      viewRef.current.animate(animate2);
+      lineRef.current.animate(lineAni2);
+    }
+  }, [focused]);
+
+  useEffect(() => {
+    setTimeout(() => {
+      setDuration(1000);
+    }, 1000);
+  }, []);
+
+  return (
+    <Animatable.View ref={viewRef} duration={duration} style={styles.container}>
+      <View>
+        {item === 'HomeStack' ? (
+          <HomeIcon color={focused ? activeColor : InactiveColor} />
+        ) : item === 'PetListStack' ? (
+          <PetListIcon color={focused ? activeColor : InactiveColor} />
+        ) : item === 'AddPet' ? (
+          <PetAddIcon color={focused ? activeColor : InactiveColor} />
+        ) : (
+          <SettingsIcon color={focused ? activeColor : InactiveColor} />
+        )}
+      </View>
+      <Animatable.View ref={lineRef} duration={duration} style={styles.line} />
+    </Animatable.View>
+  );
+};
 
 const BottomTabNavigator = () => {
   return (
@@ -44,7 +118,17 @@ const BottomTabNavigator = () => {
         component={MainScreen}
         options={{
           headerShown: false,
-          tabBarIcon: ({color}) => <HomeIcon color={color} />,
+          tabBarButton: props => (
+            <TouchableOpacity
+              onPress={props.onPress}
+              activeOpacity={1}
+              style={styles.container}>
+              <TabButton
+                accessibilityState={props.accessibilityState}
+                item={'HomeStack'}
+              />
+            </TouchableOpacity>
+          ),
         }}
       />
       <Tab.Screen
@@ -52,7 +136,17 @@ const BottomTabNavigator = () => {
         component={PetListStackNavigator}
         options={{
           headerShown: false,
-          tabBarIcon: ({color}) => <PetListIcon color={color} />,
+          tabBarButton: props => (
+            <TouchableOpacity
+              onPress={props.onPress}
+              activeOpacity={1}
+              style={styles.container}>
+              <TabButton
+                accessibilityState={props.accessibilityState}
+                item={'PetListStack'}
+              />
+            </TouchableOpacity>
+          ),
         }}
       />
       <Tab.Screen
@@ -60,7 +154,17 @@ const BottomTabNavigator = () => {
         component={NewPetScreen}
         options={{
           headerShown: false,
-          tabBarIcon: ({color}) => <PetAddIcon color={color} />,
+          tabBarButton: props => (
+            <TouchableOpacity
+              onPress={props.onPress}
+              activeOpacity={1}
+              style={styles.container}>
+              <TabButton
+                accessibilityState={props.accessibilityState}
+                item={'AddPet'}
+              />
+            </TouchableOpacity>
+          ),
         }}
       />
       <Tab.Screen
@@ -69,7 +173,17 @@ const BottomTabNavigator = () => {
         component={ViewPetScreen}
         options={{
           headerShown: false,
-          tabBarIcon: ({color}) => <SettingsIcon color={color} />,
+          tabBarButton: props => (
+            <TouchableOpacity
+              onPress={props.onPress}
+              activeOpacity={1}
+              style={styles.container}>
+              <TabButton
+                accessibilityState={props.accessibilityState}
+                item={'ViewPet'}
+              />
+            </TouchableOpacity>
+          ),
         }}
       />
     </Tab.Navigator>
@@ -77,3 +191,19 @@ const BottomTabNavigator = () => {
 };
 
 export default BottomTabNavigator;
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  line: {
+    backgroundColor: 'red',
+    height: 2,
+    width: 0,
+    marginTop: 10,
+    position: 'absolute',
+    bottom: 7,
+  },
+});
