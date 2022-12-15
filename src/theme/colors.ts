@@ -23,9 +23,9 @@ const colors = {
   mainSecond: '#B91010',
 
   /**
-   * @param Input background color 3F3F3F
+   * @param Input background color 1E1E1E
    */
-  inputBC: '#3F3F3F',
+  inputBC: '#1e1e1eff',
 
   /**
    * @param Border color B91010
@@ -60,12 +60,17 @@ const colors = {
   /**
    * @param placeholder white  FFFFFF
    */
-  tabBarBottomInactiveColor: '#D9D9D9',
+  tabBarBottomInactiveColor: '#ffffff78',
 
   /**
    * @param placeholder white  FFFFFF
    */
   imageCover: '#00000070',
+
+  /**
+   * @param inputText white  FFFFFF
+   */
+  inputText: '#FFFFFF',
 };
 
 export default colors;

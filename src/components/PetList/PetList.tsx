@@ -8,9 +8,11 @@ import usePetManageService from '../../services/PetManageService/PetManageServic
 //assets
 import Edit from '../../assets/icons/Edit';
 import Delete from '../../assets/icons/DeletePet';
-import randomDog from '../../assets/images/randomDog.png';
+import Re from '../../assets/icons/re';
 import {IPetData} from '../../types/AppTypes';
 import {PetListNavigatorProp} from '../../types/navigation';
+
+import RandomDog from '../../assets/images/randomDog.png';
 
 interface IPet {
   pet: IPetData;
@@ -39,24 +41,25 @@ const PetList = ({pet}: IPet) => {
 
   return (
     <View style={styles.item}>
-      <View style={styles.left}>
-        <Image
-          source={pet.image ? {uri: pet.image} : randomDog}
-          style={styles.imageIMG}
-        />
-        <View style={styles.name}>
-          <Text style={styles.petName}>{pet.name}</Text>
+      <Image
+        source={pet.image ? {uri: pet.image} : RandomDog}
+        style={styles.BCImage}
+      />
+
+      <View style={styles.content}>
+        <View style={styles.options}>
+          <Pressable onPress={EditItem} style={styles.edit}>
+            <Edit />
+          </Pressable>
+          <Pressable onPress={deleteItem} style={styles.edit}>
+            <Delete />
+          </Pressable>
+        </View>
+        <View style={styles.nameContainer}>
+          <Re />
           <Text style={styles.petAge}>5 Months old</Text>
         </View>
       </View>
-      <Pressable onPress={EditItem} style={styles.right}>
-        <View style={styles.edit}>
-          <Edit />
-        </View>
-        <Pressable onPress={deleteItem} style={styles.edit}>
-          <Delete />
-        </Pressable>
-      </Pressable>
     </View>
   );
 };

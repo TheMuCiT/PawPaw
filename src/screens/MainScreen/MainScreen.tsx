@@ -105,7 +105,12 @@ const MainScreen = () => {
         <Text style={styles.name}>{pet.name}</Text>
       </View>
       <View style={styles.bDay}>
-        <Text style={styles.bDayText}>{format(pet.age, 'MMMM do')}</Text>
+        <View style={styles.bDayWrapper}>
+          <Text style={styles.bDayText}>{format(pet.age, 'MMMM d')}</Text>
+          <Text style={styles.bDayTextTH}>
+            {format(pet.age, 'do').slice(-2)}
+          </Text>
+        </View>
       </View>
       <View style={styles.timer}>
         <View style={styles.timerBox}>

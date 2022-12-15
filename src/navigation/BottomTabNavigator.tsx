@@ -34,12 +34,12 @@ const animate2 = {
 };
 
 const lineAni1 = {
-  0: {width: 1},
-  1: {width: 20},
+  0: {width: 0},
+  1: {width: 30},
 };
 
 const lineAni2 = {
-  0: {width: 20},
+  0: {width: 30},
   1: {width: 0},
 };
 
@@ -102,15 +102,14 @@ const BottomTabNavigator = () => {
         tabBarActiveTintColor: colors.tabBarBottomActiveColor,
         tabBarInactiveTintColor: colors.tabBarBottomInactiveColor,
         tabBarStyle: {
-          backgroundColor: '#3f3f3fad',
+          backgroundColor: '#1e1e1ec9',
           borderTopWidth: 0,
-          borderRadius: 13,
           position: 'absolute',
           elevation: 0,
-          left: 10,
-          right: 10,
-          bottom: 15,
-          height: 55,
+          left: 0,
+          right: 0,
+          bottom: 0,
+          height: 65,
         },
       }}>
       <Tab.Screen
@@ -205,5 +204,6 @@ const styles = StyleSheet.create({
     marginTop: 10,
     position: 'absolute',
     bottom: 7,
+    borderRadius: 5,
   },
 });

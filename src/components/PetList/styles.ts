@@ -5,37 +5,52 @@ import sizes from '../../theme/sizes';
 
 const styles = StyleSheet.create({
   item: {
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-    paddingHorizontal: sizes.padding.listItemPadding,
-    paddingVertical: sizes.padding.listItemPadding,
+    borderRadius: sizes.bordersRadius.petItem,
+    marginBottom: 20,
+    shadowColor: '#0000006b',
+    shadowOffset: {width: 0, height: -3},
+    shadowRadius: 9,
+    elevation: 9,
+    marginHorizontal: sizes.padding.main,
   },
-  left: {
-    flexDirection: 'row',
+  BCImage: {
+    position: 'absolute',
+    width: '100%',
+    height: '100%',
+    borderRadius: sizes.bordersRadius.petItem,
   },
-  right: {
+  content: {
+    padding: sizes.padding.listItemPadding,
+  },
+  options: {
     flexDirection: 'row',
     alignItems: 'center',
-    justifyContent: 'center',
-  },
-  imageIMG: {
-    width: 50,
-    height: 44,
-    borderRadius: sizes.bordersRadius.image,
-  },
-  name: {marginLeft: 15, justifyContent: 'center'},
-  petName: {
-    fontFamily: fonts.family.medium,
-    fontSize: fonts.size.default,
-    color: colors.white,
-  },
-  petAge: {
-    fontFamily: fonts.family.regular,
-    fontSize: fonts.size.xxs,
-    color: colors.white,
+    justifyContent: 'flex-end',
   },
   edit: {
     marginLeft: 8,
+    width: 25,
+    height: 25,
+    borderRadius: 15,
+    elevation: 5,
+    shadowColor: '#0000006b',
+    shadowOffset: {width: -1, height: -1},
+    shadowRadius: 5,
+  },
+  nameContainer: {
+    marginTop: sizes.padding.listItemNameTop,
+    marginBottom: sizes.padding.listItemNameBottom,
+    alignItems: 'center',
+  },
+  petName: {
+    fontSize: fonts.size.xxxlg,
+    fontFamily: fonts.family.semiBold,
+    textTransform: 'uppercase',
+  },
+  petAge: {
+    fontSize: fonts.size.md,
+    fontFamily: fonts.family.semiBold,
+    color: colors.white,
   },
 });
 
