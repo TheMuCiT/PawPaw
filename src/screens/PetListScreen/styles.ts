@@ -9,54 +9,23 @@ const styles = StyleSheet.create({
     backgroundColor: colors.bcMain,
     height: '100%',
   },
-  linearGradient: {
-    flex: 1,
-    width: '100%',
-    alignItems: 'center',
-    justifyContent: 'flex-start',
-  },
   pageMargin: {
-    paddingHorizontal: 30,
     width: '100%',
     flex: 1,
   },
   logo: {
     alignItems: 'center',
     marginTop: 10,
+    paddingHorizontal: 30,
   },
   logoIcon: {
     width: 21,
     height: 21,
   },
-  logoText: {
-    color: colors.logo,
-    fontSize: fonts.size.xlg,
-    fontFamily: fonts.family.semiBold,
-    textTransform: 'uppercase',
-    marginTop: -10,
-  },
-  search: {
-    width: '100%',
-    height: 50,
-    backgroundColor: 'white',
-    borderRadius: sizes.bordersRadius.input,
-    marginTop: sizes.padding.listSearchTop,
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-    alignItems: 'center',
-    paddingHorizontal: sizes.padding.inputHorizontal,
-    display: 'none',
-  },
-  searchText: {
-    width: '90%',
-  },
-
   list: {
-    marginTop: 20,
-    borderRadius: sizes.bordersRadius.input,
-    backgroundColor: '#00000070',
+    marginTop: 30,
     flex: 1,
-    marginBottom: 100,
+    paddingBottom: 20,
   },
 
   BackgroundLogo1: {

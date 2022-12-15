@@ -39,6 +39,9 @@ const styles = StyleSheet.create({
     top: '25%',
     alignItems: 'center',
   },
+  bDayWrapper: {
+    flexDirection: 'row',
+  },
   bDayText: {
     color: colors.white,
     fontFamily: fonts.family.semiBold,

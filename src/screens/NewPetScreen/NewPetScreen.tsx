@@ -12,11 +12,11 @@ import styles from './styles';
 
 //library
 import AsyncStorage from '@react-native-async-storage/async-storage';
-import LinearGradient from 'react-native-linear-gradient';
 import {format} from 'date-fns';
 import DatePicker from 'react-native-date-picker';
 import {launchImageLibrary} from 'react-native-image-picker';
 import {useNavigation} from '@react-navigation/native';
+import DropShadow from 'react-native-drop-shadow';
 
 //files
 import {usePetContext} from '../../contexts/PetContext';
@@ -26,8 +26,9 @@ import useNewPetService from '../../services/NewPetService';
 
 //assets
 import AddImageIcon from '../../assets/icons/AddImageIcon';
+import AddAPhoto from '../../assets/icons/AddAPhoto';
 import Calendar from '../../assets/icons/Calendar';
-import BackgroundLogo from '../../assets/icons/BackgroundLogo';
+import NewPet from '../../assets/images/NewPet.png';
 
 const NewPetScreen = () => {
   const navigation = useNavigation<NewPetScreenNavigatorProp>();
@@ -41,7 +42,7 @@ const NewPetScreen = () => {
   const [open, setOpen] = useState<boolean>(false);
   const [showDate, setShowDate] = useState<boolean>(false);
 
-  const [note, setNote] = useState<string>('');
+  const [gender, setGender] = useState<string>('');
 
   const [image, setImage] = useState<undefined | string>(undefined);
   const [imageBase, setImageBase] = useState<undefined | string>(undefined);
@@ -71,7 +72,7 @@ const NewPetScreen = () => {
     setBreed('');
     setShowDate(false);
     setImage(undefined);
-    setNote('');
+    setGender('');
   };
 
   const saveData = async () => {
@@ -83,7 +84,7 @@ const NewPetScreen = () => {
         await AsyncStorage.setItem(`petName${count}`, petName);
         await AsyncStorage.setItem(`breed${count}`, breed);
         await AsyncStorage.setItem(`age${count}`, format(age, 'yyyy-MM-dd'));
-        await AsyncStorage.setItem(`note${count}`, note);
+        await AsyncStorage.setItem(`gender${count}`, gender);
         await saveImage(imageBase, count);
         updateCount(count + 1);
         updatePage();
@@ -97,38 +98,53 @@ const NewPetScreen = () => {
 
   return (
     <View style={styles.page}>
-      <LinearGradient
-        style={styles.linearGradient}
-        start={{x: 0.4, y: 0.7}}
-        end={{x: 1, y: 1}}
-        locations={[0.0, 0.8]}
-        colors={[colors.bcMain, colors.bcMainSecond]}>
-        <BackgroundLogo style={styles.BackgroundLogo1} />
-        <BackgroundLogo style={styles.BackgroundLogo2} />
-        <BackgroundLogo style={styles.BackgroundLogo3} />
-        <BackgroundLogo style={styles.BackgroundLogo4} />
-        <BackgroundLogo style={styles.BackgroundLogo5} />
+      <Image source={NewPet} style={styles.BCImage} />
+      <Pressable onPress={() => launchImagePicker()} style={styles.AddImage}>
+        <DropShadow
+          style={{
+            shadowColor: '#ff0000',
+            shadowOffset: {
+              width: 0,
+              height: 4,
+            },
+            shadowOpacity: 0.84,
+            shadowRadius: 6,
+          }}>
+          <View style={styles.addImageContainer}>
+            {image === undefined ? (
+              <View style={styles.addImageEmpty}>
+                <AddImageIcon style={{marginBottom: 10}} />
+                <AddAPhoto />
+              </View>
+            ) : (
+              <Image
+                source={{uri: 'data:image/png;base64,' + image}}
+                style={[
+                  styles.image,
+                  {
+                    width: '100%',
+                    height: '100%',
+                    resizeMode: 'cover',
+                  },
+                ]}
+              />
+            )}
+          </View>
+        </DropShadow>
+      </Pressable>
 
-        <Pressable onPress={() => launchImagePicker()} style={styles.AddImage}>
-          {image === undefined ? (
-            <>
-              <Text style={styles.AddImageText}>Add a photo</Text>
-              <AddImageIcon />
-            </>
-          ) : (
-            <Image
-              source={{uri: image}}
-              style={{
-                width: '100%',
-                height: '100%',
-                resizeMode: 'cover',
-              }}
-            />
-          )}
-        </Pressable>
-
-        <ScrollView style={styles.InputsContainer}>
-          <View style={styles.Inputs}>
+      <ScrollView style={styles.InputsContainer}>
+        <View style={styles.Inputs}>
+          <DropShadow
+            style={{
+              shadowColor: '#000000',
+              shadowOffset: {
+                width: 0,
+                height: 4,
+              },
+              shadowOpacity: 0.25,
+              shadowRadius: 4,
+            }}>
             <TextInput
               style={styles.InputElement}
               value={petName}
@@ -137,15 +153,58 @@ const NewPetScreen = () => {
               placeholderTextColor={colors.inputPlaceholder}
               maxLength={20}
             />
+          </DropShadow>
+
+          <DropShadow
+            style={{
+              shadowColor: '#000000',
+              shadowOffset: {
+                width: 0,
+                height: 4,
+              },
+              shadowOpacity: 0.25,
+              shadowRadius: 4,
+            }}>
             <TextInput
               style={styles.InputElement}
               value={breed}
-              placeholder={'What’s your pet’s breed'}
+              placeholder={'Pet’s breed'}
               onChangeText={setBreed}
               placeholderTextColor={colors.inputPlaceholder}
               maxLength={20}
             />
+          </DropShadow>
 
+          <DropShadow
+            style={{
+              shadowColor: '#000000',
+              shadowOffset: {
+                width: 0,
+                height: 4,
+              },
+              shadowOpacity: 0.25,
+              shadowRadius: 4,
+            }}>
+            <TextInput
+              style={styles.InputElement}
+              value={gender}
+              placeholder={'Gender'}
+              onChangeText={setBreed}
+              placeholderTextColor={colors.inputPlaceholder}
+              maxLength={20}
+            />
+          </DropShadow>
+
+          <DropShadow
+            style={{
+              shadowColor: '#000000',
+              shadowOffset: {
+                width: 0,
+                height: 4,
+              },
+              shadowOpacity: 0.25,
+              shadowRadius: 4,
+            }}>
             <Pressable
               onPress={() => setOpen(true)}
               style={styles.InputElementDate}>
@@ -173,32 +232,30 @@ const NewPetScreen = () => {
                 }}
               />
             </Pressable>
+          </DropShadow>
 
-            <View style={styles.NodeInput}>
-              <TextInput
-                style={[styles.InputElementNote]}
-                value={note}
-                multiline
-                placeholder={'Notes about your pet'}
-                onChangeText={setNote}
-                placeholderTextColor={colors.inputPlaceholder}
-                numberOfLines={4}
-                maxLength={120}
-              />
-            </View>
-
+          <DropShadow
+            style={{
+              shadowColor: '#b91010c1',
+              shadowOffset: {
+                width: 0,
+                height: 3,
+              },
+              shadowOpacity: 0.76,
+              shadowRadius: 10,
+            }}>
             <Pressable onPress={saveData} style={styles.Button}>
               <Text style={styles.ButtonText}>
                 {loading
                   ? 'Loading'
                   : valid === false
                   ? 'Input is not valid try again'
-                  : 'save and continue'}
+                  : 'Start now'}
               </Text>
             </Pressable>
-          </View>
-        </ScrollView>
-      </LinearGradient>
+          </DropShadow>
+        </View>
+      </ScrollView>
     </View>
   );
 };

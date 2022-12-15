@@ -8,19 +8,71 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: colors.bcMain,
   },
-  linearGradient: {
-    flex: 1,
-    width: '100%',
-    alignItems: 'center',
-    justifyContent: 'flex-start',
-  },
   AddImage: {
-    height: '40%',
-    minHeight: 150,
+    position: 'absolute',
+    height: '100%',
     width: '100%',
-    alignItems: 'center',
-    justifyContent: 'center',
     backgroundColor: colors.imageAddBackground,
+  },
+
+  Logo: {
+    alignItems: 'center',
+    marginTop: sizes.padding.listSearchTop,
+  },
+
+  MainBox: {
+    flex: 1,
+    justifyContent: 'flex-end',
+    alignItems: 'center',
+    marginBottom: 80,
+  },
+
+  BoxBcImage: {
+    position: 'absolute',
+    bottom: 55,
+  },
+
+  Box: {
+    backgroundColor: 'rgba(30, 30, 30, 0.78)',
+    marginBottom: sizes.padding.main,
+
+    paddingHorizontal: sizes.padding.mainInfoArrowSize,
+    paddingBottom: sizes.padding.listItemNameTop,
+    paddingTop: sizes.padding.listItemPadding,
+
+    borderRadius: sizes.bordersRadius.viewBox,
+    alignItems: 'center',
+  },
+
+  petName: {
+    fontSize: 36,
+    fontFamily: fonts.family.semiBold,
+    color: colors.border,
+    textTransform: 'uppercase',
+    marginBottom: 40,
+  },
+
+  BoxField: {
+    width: 150,
+    borderRadius: sizes.bordersRadius.image,
+    backgroundColor: '#1E1E1E',
+    marginBottom: 16,
+    alignItems: 'center',
+    paddingVertical: 8,
+  },
+
+  BoxText: {
+    fontSize: fonts.size.default,
+    fontFamily: fonts.family.regular,
+    color: colors.white,
+    opacity: 0.73,
+    letterSpacing: 1,
+  },
+
+  swipe: {
+    width: 51,
+    height: 74,
+    marginTop: 30,
   },
 
   NameContainer: {

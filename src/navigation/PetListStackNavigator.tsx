@@ -4,7 +4,6 @@ import {createNativeStackNavigator} from '@react-navigation/native-stack';
 import {PetListStackNavigatorParamList} from '../types/navigation';
 import PetListScreen from '../screens/PetListScreen';
 import UpdatePetScreen from '../screens/UpdatePetScreen';
-import {View} from 'react-native';
 
 const Stack = createNativeStackNavigator<PetListStackNavigatorParamList>();
 
