@@ -20,6 +20,7 @@ import SettingsIcon from '../assets/icons/SettingsIcon';
 import PetListStackNavigator from './PetListStackNavigator';
 import ViewPetScreen from '../screens/ViewPetScreen';
 import {StyleSheet, TouchableOpacity, View} from 'react-native';
+import sizes from '../theme/sizes';
 
 const Tab = createBottomTabNavigator<BottomTabNavigatorParamList>();
 
@@ -109,7 +110,7 @@ const BottomTabNavigator = () => {
           left: 0,
           right: 0,
           bottom: 0,
-          height: 65,
+          height: sizes.height.navBarHeight,
         },
       }}>
       <Tab.Screen
@@ -203,7 +204,7 @@ const styles = StyleSheet.create({
     width: 0,
     marginTop: 10,
     position: 'absolute',
-    bottom: 7,
+    bottom: 15,
     borderRadius: 5,
   },
 });

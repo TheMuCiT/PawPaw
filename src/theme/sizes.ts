@@ -30,7 +30,7 @@ const borderWidth = {
   input: 0.5,
 
   /**
-   * @param 0.5
+   * @param 2
    */
   timer: 2,
 };
@@ -43,7 +43,7 @@ const padding = {
 
   buttonPadding: 16,
 
-  timer: 70,
+  timer: 85,
 
   mainInfoArrowSize: 80,
   mainInfoIcon: 20,
@@ -60,5 +60,7 @@ const padding = {
 const height = {
   input: 45,
   inputNote: 80,
+
+  navBarHeight: 70,
 };
 export default {bordersRadius, borderWidth, padding, height};

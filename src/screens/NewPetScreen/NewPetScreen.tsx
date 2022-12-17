@@ -6,8 +6,10 @@ import {
   Image,
   Alert,
   ScrollView,
+  KeyboardAvoidingView,
+  Platform,
 } from 'react-native';
-import {useState} from 'react';
+import {useRef, useState} from 'react';
 import styles from './styles';
 
 //library
@@ -26,11 +28,14 @@ import useNewPetService from '../../services/NewPetService';
 
 //assets
 import AddImageIcon from '../../assets/icons/AddImageIcon';
-import AddAPhoto from '../../assets/icons/AddAPhoto';
+import BCLogoSmall from '../../assets/icons/BCLogoSmall';
 import Calendar from '../../assets/icons/Calendar';
 import NewPet from '../../assets/images/NewPet.png';
+import AddImage from '../../assets/images/AddImage.png';
+import EditImage from '../../assets/images/EditImage.png';
 
 const NewPetScreen = () => {
+  const scrollViewRef = useRef<ScrollView | null>(null);
   const navigation = useNavigation<NewPetScreenNavigatorProp>();
   const {count, updateCount} = usePetContext();
   const {validateInput, saveImage} = useNewPetService();
@@ -97,166 +102,159 @@ const NewPetScreen = () => {
   };
 
   return (
-    <View style={styles.page}>
-      <Image source={NewPet} style={styles.BCImage} />
-      <Pressable onPress={() => launchImagePicker()} style={styles.AddImage}>
-        <DropShadow
-          style={{
-            shadowColor: '#ff0000',
-            shadowOffset: {
-              width: 0,
-              height: 4,
-            },
-            shadowOpacity: 0.84,
-            shadowRadius: 6,
-          }}>
-          <View style={styles.addImageContainer}>
-            {image === undefined ? (
-              <View style={styles.addImageEmpty}>
-                <AddImageIcon style={{marginBottom: 10}} />
-                <AddAPhoto />
-              </View>
-            ) : (
-              <Image
-                source={{uri: 'data:image/png;base64,' + image}}
-                style={[
-                  styles.image,
-                  {
-                    width: '100%',
-                    height: '100%',
-                    resizeMode: 'cover',
-                  },
-                ]}
+    <KeyboardAvoidingView
+      style={{flex: 1}}
+      behavior={Platform.OS === 'ios' ? 'padding' : 'height'}>
+      <ScrollView
+        ref={scrollViewRef}
+        keyboardShouldPersistTaps={'always'}
+        contentContainerStyle={{flexGrow: 1}}
+        style={styles.page}
+        showsVerticalScrollIndicator={false}
+        onContentSizeChange={() =>
+          scrollViewRef?.current?.scrollToEnd({animated: false})
+        }>
+        <Image source={NewPet} style={styles.BCImage} />
+        <Pressable onPress={() => launchImagePicker()} style={styles.AddImage}>
+          {image === undefined ? (
+            <Image
+              source={AddImage}
+              style={{width: '250%', resizeMode: 'contain'}}
+            />
+          ) : (
+            <Image
+              source={EditImage}
+              style={{width: '250%', resizeMode: 'contain'}}
+            />
+          )}
+        </Pressable>
+
+        <View style={styles.InputsContainer}>
+          <View style={styles.Inputs}>
+            <DropShadow
+              style={{
+                shadowColor: '#000000',
+                shadowOffset: {
+                  width: 0,
+                  height: 4,
+                },
+                shadowOpacity: 0.25,
+                shadowRadius: 4,
+              }}>
+              <TextInput
+                style={styles.InputElement}
+                value={petName}
+                placeholder={'What’s your pet’s name'}
+                onChangeText={setPetName}
+                placeholderTextColor={colors.inputPlaceholder}
+                maxLength={20}
               />
-            )}
-          </View>
-        </DropShadow>
-      </Pressable>
+            </DropShadow>
+            <DropShadow
+              style={{
+                shadowColor: '#000000',
+                shadowOffset: {
+                  width: 0,
+                  height: 4,
+                },
+                shadowOpacity: 0.25,
+                shadowRadius: 4,
+              }}>
+              <TextInput
+                style={styles.InputElement}
+                value={breed}
+                placeholder={'Pet’s breed'}
+                onChangeText={setBreed}
+                placeholderTextColor={colors.inputPlaceholder}
+                maxLength={20}
+              />
+            </DropShadow>
 
-      <ScrollView style={styles.InputsContainer}>
-        <View style={styles.Inputs}>
-          <DropShadow
-            style={{
-              shadowColor: '#000000',
-              shadowOffset: {
-                width: 0,
-                height: 4,
-              },
-              shadowOpacity: 0.25,
-              shadowRadius: 4,
-            }}>
-            <TextInput
-              style={styles.InputElement}
-              value={petName}
-              placeholder={'What’s your pet’s name'}
-              onChangeText={setPetName}
-              placeholderTextColor={colors.inputPlaceholder}
-              maxLength={20}
-            />
-          </DropShadow>
+            <DropShadow
+              style={{
+                shadowColor: '#000000',
+                shadowOffset: {
+                  width: 0,
+                  height: 4,
+                },
+                shadowOpacity: 0.25,
+                shadowRadius: 4,
+              }}>
+              <TextInput
+                style={styles.InputElement}
+                value={gender}
+                placeholder={'Gender'}
+                onChangeText={setBreed}
+                placeholderTextColor={colors.inputPlaceholder}
+                maxLength={20}
+              />
+            </DropShadow>
 
-          <DropShadow
-            style={{
-              shadowColor: '#000000',
-              shadowOffset: {
-                width: 0,
-                height: 4,
-              },
-              shadowOpacity: 0.25,
-              shadowRadius: 4,
-            }}>
-            <TextInput
-              style={styles.InputElement}
-              value={breed}
-              placeholder={'Pet’s breed'}
-              onChangeText={setBreed}
-              placeholderTextColor={colors.inputPlaceholder}
-              maxLength={20}
-            />
-          </DropShadow>
+            <DropShadow
+              style={{
+                shadowColor: '#000000',
+                shadowOffset: {
+                  width: 0,
+                  height: 4,
+                },
+                shadowOpacity: 0.25,
+                shadowRadius: 4,
+              }}>
+              <Pressable
+                onPress={() => setOpen(true)}
+                style={styles.InputElementDate}>
+                <View>
+                  <Text style={styles.InputElementText}>
+                    {showDate ? format(age, 'yyyy-MM-dd') : 'Age of your pet'}
+                  </Text>
+                </View>
+                <View>
+                  <Calendar />
+                </View>
 
-          <DropShadow
-            style={{
-              shadowColor: '#000000',
-              shadowOffset: {
-                width: 0,
-                height: 4,
-              },
-              shadowOpacity: 0.25,
-              shadowRadius: 4,
-            }}>
-            <TextInput
-              style={styles.InputElement}
-              value={gender}
-              placeholder={'Gender'}
-              onChangeText={setBreed}
-              placeholderTextColor={colors.inputPlaceholder}
-              maxLength={20}
-            />
-          </DropShadow>
+                <DatePicker
+                  modal
+                  mode={'date'}
+                  open={open}
+                  date={age}
+                  onConfirm={age => {
+                    setOpen(false);
+                    setAge(age);
+                    setShowDate(true);
+                  }}
+                  onCancel={() => {
+                    setOpen(false);
+                  }}
+                />
+              </Pressable>
+            </DropShadow>
 
-          <DropShadow
-            style={{
-              shadowColor: '#000000',
-              shadowOffset: {
-                width: 0,
-                height: 4,
-              },
-              shadowOpacity: 0.25,
-              shadowRadius: 4,
-            }}>
-            <Pressable
-              onPress={() => setOpen(true)}
-              style={styles.InputElementDate}>
-              <View>
-                <Text style={styles.InputElementText}>
-                  {showDate ? format(age, 'yyyy-MM-dd') : 'Age of your pet'}
+            <DropShadow
+              style={{
+                shadowColor: '#b91010c1',
+                shadowOffset: {
+                  width: 0,
+                  height: 3,
+                },
+                shadowOpacity: 0.76,
+                shadowRadius: 10,
+              }}>
+              <Pressable onPress={saveData} style={styles.Button}>
+                <BCLogoSmall style={styles.bcLogoSmall1} />
+                <BCLogoSmall style={styles.bcLogoSmall2} />
+                <Text style={styles.ButtonText}>
+                  {loading
+                    ? 'Loading'
+                    : valid === false
+                    ? 'Invalid Input'
+                    : 'Start now'}
                 </Text>
-              </View>
-              <View>
-                <Calendar />
-              </View>
-
-              <DatePicker
-                modal
-                mode={'date'}
-                open={open}
-                date={age}
-                onConfirm={age => {
-                  setOpen(false);
-                  setAge(age);
-                  setShowDate(true);
-                }}
-                onCancel={() => {
-                  setOpen(false);
-                }}
-              />
-            </Pressable>
-          </DropShadow>
-
-          <DropShadow
-            style={{
-              shadowColor: '#b91010c1',
-              shadowOffset: {
-                width: 0,
-                height: 3,
-              },
-              shadowOpacity: 0.76,
-              shadowRadius: 10,
-            }}>
-            <Pressable onPress={saveData} style={styles.Button}>
-              <Text style={styles.ButtonText}>
-                {loading
-                  ? 'Loading'
-                  : valid === false
-                  ? 'Input is not valid try again'
-                  : 'Start now'}
-              </Text>
-            </Pressable>
-          </DropShadow>
+              </Pressable>
+            </DropShadow>
+          </View>
         </View>
       </ScrollView>
-    </View>
+    </KeyboardAvoidingView>
   );
 };
 

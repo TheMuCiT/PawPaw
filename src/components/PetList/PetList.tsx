@@ -13,6 +13,7 @@ import {IPetData} from '../../types/AppTypes';
 import {PetListNavigatorProp} from '../../types/navigation';
 
 import RandomDog from '../../assets/images/randomDog.png';
+import GradientText from '../GradientText/GradientText';
 
 interface IPet {
   pet: IPetData;
@@ -56,7 +57,7 @@ const PetList = ({pet}: IPet) => {
           </Pressable>
         </View>
         <View style={styles.nameContainer}>
-          <Re />
+          <GradientText name={pet.name} style={styles.petName} />
           <Text style={styles.petAge}>5 Months old</Text>
         </View>
       </View>

@@ -46,6 +46,7 @@ const styles = StyleSheet.create({
     fontSize: fonts.size.xxxlg,
     fontFamily: fonts.family.semiBold,
     textTransform: 'uppercase',
+    color: '#000000',
   },
   petAge: {
     fontSize: fonts.size.md,
