@@ -12,6 +12,7 @@ const styles = StyleSheet.create({
     position: 'absolute',
     width: '100%',
     height: '100%',
+    zIndex: -5,
   },
   AddImage: {
     marginTop: 30,
@@ -47,6 +48,29 @@ const styles = StyleSheet.create({
     fontSize: fonts.size.default,
     fontFamily: fonts.family.regular,
     opacity: 0.65,
+  },
+
+  InputElementDrop: {
+    width: '100%',
+    height: sizes.height.input,
+
+    backgroundColor: colors.inputBC,
+    borderRadius: sizes.bordersRadius.input,
+
+    paddingHorizontal: sizes.padding.inputHorizontal,
+    marginBottom: sizes.padding.inputBottom,
+
+    fontSize: fonts.size.default,
+    fontFamily: fonts.family.regular,
+    opacity: 0.65,
+
+    borderWidth: 0,
+  },
+
+  InputElementDropText: {
+    color: colors.inputText,
+    fontSize: fonts.size.default,
+    fontFamily: fonts.family.regular,
   },
 
   InputElementDate: {

@@ -40,6 +40,7 @@ import Back from '../../assets/icons/Back';
 import NewPet from '../../assets/images/NewPet.png';
 import AddImage from '../../assets/images/AddImage.png';
 import EditImage from '../../assets/images/EditImage.png';
+import DropDownPicker from 'react-native-dropdown-picker';
 
 const UpdatePetScreen = () => {
   const scrollViewRef = useRef<ScrollView | null>(null);
@@ -63,6 +64,18 @@ const UpdatePetScreen = () => {
 
   const [valid, setValid] = useState<boolean | null>(null);
   const [loading, setLoading] = useState<boolean>(false);
+
+  const [openGender, setOpenGender] = useState(false);
+  const dropDownItems = [
+    {
+      label: 'Male',
+      value: 'Male',
+    },
+    {
+      label: 'Female',
+      value: 'Female',
+    },
+  ];
 
   const launchImagePicker = async () => {
     const result = await launchImageLibrary({
@@ -210,13 +223,19 @@ const UpdatePetScreen = () => {
                 shadowOpacity: 0.25,
                 shadowRadius: 4,
               }}>
-              <TextInput
-                style={styles.InputElement}
+              <DropDownPicker
+                open={openGender}
                 value={gender}
-                placeholder={'Gender'}
-                onChangeText={setBreed}
-                placeholderTextColor={colors.inputPlaceholder}
-                maxLength={20}
+                items={dropDownItems}
+                setOpen={setOpenGender}
+                setValue={setGender}
+                style={styles.InputElementDrop}
+                listMode="SCROLLVIEW"
+                zIndex={10}
+                placeholder="Gender"
+                textStyle={styles.InputElementDropText}
+                theme="DARK"
+                dropDownContainerStyle={{backgroundColor: colors.inputBC}}
               />
             </DropShadow>
 

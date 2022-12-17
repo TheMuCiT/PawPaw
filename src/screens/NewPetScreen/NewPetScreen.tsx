@@ -33,6 +33,7 @@ import Calendar from '../../assets/icons/Calendar';
 import NewPet from '../../assets/images/NewPet.png';
 import AddImage from '../../assets/images/AddImage.png';
 import EditImage from '../../assets/images/EditImage.png';
+import DropDownPicker from 'react-native-dropdown-picker';
 
 const NewPetScreen = () => {
   const scrollViewRef = useRef<ScrollView | null>(null);
@@ -54,6 +55,18 @@ const NewPetScreen = () => {
 
   const [valid, setValid] = useState<boolean | null>(null);
   const [loading, setLoading] = useState<boolean>(false);
+
+  const [openGender, setOpenGender] = useState(false);
+  const dropDownItems = [
+    {
+      label: 'Male',
+      value: 'Male',
+    },
+    {
+      label: 'Female',
+      value: 'Female',
+    },
+  ];
 
   const launchImagePicker = async () => {
     const result = await launchImageLibrary({
@@ -113,7 +126,8 @@ const NewPetScreen = () => {
         showsVerticalScrollIndicator={false}
         onContentSizeChange={() =>
           scrollViewRef?.current?.scrollToEnd({animated: false})
-        }>
+        }
+        nestedScrollEnabled={true}>
         <Image source={NewPet} style={styles.BCImage} />
         <Pressable onPress={() => launchImagePicker()} style={styles.AddImage}>
           {image === undefined ? (
@@ -180,13 +194,19 @@ const NewPetScreen = () => {
                 shadowOpacity: 0.25,
                 shadowRadius: 4,
               }}>
-              <TextInput
-                style={styles.InputElement}
+              <DropDownPicker
+                open={openGender}
                 value={gender}
-                placeholder={'Gender'}
-                onChangeText={setBreed}
-                placeholderTextColor={colors.inputPlaceholder}
-                maxLength={20}
+                items={dropDownItems}
+                setOpen={setOpenGender}
+                setValue={setGender}
+                style={styles.InputElementDrop}
+                listMode="SCROLLVIEW"
+                zIndex={10}
+                placeholder="Gender"
+                textStyle={styles.InputElementDropText}
+                theme="DARK"
+                dropDownContainerStyle={{backgroundColor: colors.inputBC}}
               />
             </DropShadow>
 
@@ -199,6 +219,7 @@ const NewPetScreen = () => {
                 },
                 shadowOpacity: 0.25,
                 shadowRadius: 4,
+                zIndex: -1,
               }}>
               <Pressable
                 onPress={() => setOpen(true)}
