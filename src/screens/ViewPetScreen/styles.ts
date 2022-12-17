@@ -32,24 +32,12 @@ const styles = StyleSheet.create({
     bottom: 55,
   },
 
-  Box: {
-    backgroundColor: 'rgba(30, 30, 30, 0.78)',
-    marginBottom: sizes.padding.main,
-
-    paddingHorizontal: sizes.padding.mainInfoArrowSize,
-    paddingBottom: sizes.padding.listItemNameTop,
-    paddingTop: sizes.padding.listItemPadding,
-
-    borderRadius: sizes.bordersRadius.viewBox,
-    alignItems: 'center',
-  },
-
   petName: {
-    fontSize: 36,
+    fontSize: fonts.size.xxxlg,
     fontFamily: fonts.family.semiBold,
-    color: colors.border,
+    color: '#000000',
     textTransform: 'uppercase',
-    marginBottom: 40,
+    alignItems: 'center',
   },
 
   BoxField: {
@@ -59,6 +47,10 @@ const styles = StyleSheet.create({
     marginBottom: 16,
     alignItems: 'center',
     paddingVertical: 8,
+
+    shadowColor: '#b91010ff',
+    shadowRadius: 9,
+    elevation: 9,
   },
 
   BoxText: {

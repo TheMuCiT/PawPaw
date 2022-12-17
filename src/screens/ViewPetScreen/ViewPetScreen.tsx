@@ -20,6 +20,7 @@ import Swipe from '../../assets/icons/Swipe';
 import RandomDog from '../../assets/images/randomDog.png';
 import swipe from '../../assets/images/swipe.png';
 import testBox from '../../assets/images/testBox.png';
+import GradientText from '../../components/GradientText/GradientText';
 
 const ViewPetScreen = () => {
   const route = useRoute<ViewPetRouteProp>();
@@ -122,7 +123,8 @@ const ViewPetScreen = () => {
 
       <View style={styles.MainBox}>
         <Image source={testBox} style={styles.BoxBcImage} />
-        <Text style={styles.petName}>{petName}</Text>
+        <GradientText name={petName} style={styles.petName} offset={0.3} />
+        <View style={{marginBottom: 40}} />
         <View style={styles.BoxField}>
           <Text style={styles.BoxText}>{breed}</Text>
         </View>

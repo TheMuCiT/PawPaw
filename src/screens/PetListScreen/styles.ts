@@ -30,51 +30,72 @@ const styles = StyleSheet.create({
 
   BackgroundLogo1: {
     position: 'absolute',
-    top: '5%',
-    left: '80%',
-    transform: [{rotate: '-30.00deg'}],
+    top: '-2%',
+    left: '20%',
+    transform: [{rotate: '-23.03deg'}],
   },
 
   BackgroundLogo2: {
     position: 'absolute',
-    top: '20%',
-    right: '35%',
-    transform: [{rotate: '-30.00deg'}],
+    top: '5%',
+    right: '10%',
+    transform: [{rotate: '-23.03deg'}],
   },
 
   BackgroundLogo3: {
     position: 'absolute',
-    top: '32%',
-    left: '2%',
-    transform: [{rotate: '24.63deg'}],
+    top: '12%',
+    left: '3%',
+    transform: [{rotate: '-23.03deg'}],
   },
 
   BackgroundLogo4: {
     position: 'absolute',
-    top: '45%',
-    right: '25%',
-    transform: [{rotate: '35.02deg'}],
+    top: '12.5%',
+    right: '35%',
+    transform: [{rotate: '-23.03deg'}],
   },
 
   BackgroundLogo5: {
     position: 'absolute',
-    top: '60%',
-    left: '-2%',
-    transform: [{rotate: '-10.31deg'}],
+    top: '30%',
+    right: '1%',
+    transform: [{rotate: '60deg'}],
   },
 
   BackgroundLogo6: {
     position: 'absolute',
-    top: '65%',
-    left: '50%',
-    transform: [{rotate: '-10.31deg'}],
+    top: '35%',
+    left: '2%',
+    transform: [{rotate: '-60deg'}],
   },
 
   BackgroundLogo7: {
     position: 'absolute',
-    top: '75%',
+    top: '49%',
+    left: '28%',
+    transform: [{rotate: '-23.03deg'}],
+  },
+
+  BackgroundLogo8: {
+    position: 'absolute',
+    bottom: '30%',
+    right: '1%',
+    transform: [{rotate: '45deg'}],
+  },
+
+  BackgroundLogo9: {
+    position: 'absolute',
+    bottom: '18%',
+    left: '1%',
+    transform: [{rotate: '-90deg'}],
+  },
+
+  BackgroundLogo10: {
+    position: 'absolute',
+    bottom: '10%',
     right: '-2%',
-    transform: [{rotate: '35.02deg'}],
+    transform: [{rotate: '-75deg'}],
   },
 });
 

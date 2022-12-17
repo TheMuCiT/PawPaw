@@ -6,9 +6,10 @@ import MaskedView from '@react-native-community/masked-view';
 interface IGradientText {
   name: string;
   style: TextStyle;
+  offset: number;
 }
 
-const GradientText = ({name, style}: IGradientText) => {
+const GradientText = ({name, style, offset}: IGradientText) => {
   return (
     <View>
       <Text
@@ -18,7 +19,7 @@ const GradientText = ({name, style}: IGradientText) => {
             position: 'absolute',
             color: '#ffffff',
             textShadowColor: '#ffffff',
-            textShadowRadius: 20,
+            textShadowRadius: 15,
           },
         ]}>
         {name}
@@ -29,7 +30,7 @@ const GradientText = ({name, style}: IGradientText) => {
         }>
         <LinearGradient
           start={{x: 0, y: 0}}
-          locations={[0, 0.3, 1]}
+          locations={[0, offset, 1]}
           end={{x: 0, y: 1}}
           colors={['black', 'black', 'red']}>
           <Text style={[style, {opacity: 0}]}>{name}</Text>

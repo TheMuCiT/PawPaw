@@ -19,6 +19,13 @@ const styles = StyleSheet.create({
     height: '100%',
     borderRadius: sizes.bordersRadius.petItem,
   },
+  BCImageCover: {
+    position: 'absolute',
+    width: '100%',
+    height: '100%',
+    borderRadius: sizes.bordersRadius.petItem,
+    backgroundColor: '#00000061',
+  },
   content: {
     padding: sizes.padding.listItemPadding,
   },
@@ -28,9 +35,9 @@ const styles = StyleSheet.create({
     justifyContent: 'flex-end',
   },
   edit: {
-    marginLeft: 8,
-    width: 25,
-    height: 25,
+    marginLeft: 3,
+    width: 38,
+    height: 38,
     borderRadius: 15,
     elevation: 5,
     shadowColor: '#0000006b',

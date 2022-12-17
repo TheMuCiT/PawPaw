@@ -8,7 +8,6 @@ import usePetManageService from '../../services/PetManageService/PetManageServic
 //assets
 import Edit from '../../assets/icons/Edit';
 import Delete from '../../assets/icons/DeletePet';
-import Re from '../../assets/icons/re';
 import {IPetData} from '../../types/AppTypes';
 import {PetListNavigatorProp} from '../../types/navigation';
 
@@ -46,6 +45,7 @@ const PetList = ({pet}: IPet) => {
         source={pet.image ? {uri: pet.image} : RandomDog}
         style={styles.BCImage}
       />
+      {pet.image && <View style={styles.BCImageCover} />}
 
       <View style={styles.content}>
         <View style={styles.options}>
@@ -57,7 +57,7 @@ const PetList = ({pet}: IPet) => {
           </Pressable>
         </View>
         <View style={styles.nameContainer}>
-          <GradientText name={pet.name} style={styles.petName} />
+          <GradientText name={pet.name} style={styles.petName} offset={0.3} />
           <Text style={styles.petAge}>5 Months old</Text>
         </View>
       </View>
