@@ -206,7 +206,10 @@ const NewPetScreen = () => {
                 placeholder="Gender"
                 textStyle={styles.InputElementDropText}
                 theme="DARK"
-                dropDownContainerStyle={{backgroundColor: colors.inputBC}}
+                dropDownContainerStyle={{
+                  backgroundColor: colors.inputBC,
+                  borderWidth: 0,
+                }}
               />
             </DropShadow>
 

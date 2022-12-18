@@ -1,5 +1,5 @@
-import {useEffect, useState} from 'react';
-import {View, Text, Image, ScrollView} from 'react-native';
+import {useEffect, useRef, useState} from 'react';
+import {View, Text, Image, ScrollView, Animated, Pressable} from 'react-native';
 import styles from './styles';
 
 //library
@@ -8,6 +8,7 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 import {useRoute} from '@react-navigation/native';
 import {addDays, format, formatDistance, intervalToDuration} from 'date-fns';
 import DropShadow from 'react-native-drop-shadow';
+import Lottie from 'lottie-react-native';
 
 //files
 import colors from '../../theme/colors';
@@ -21,10 +22,13 @@ import RandomDog from '../../assets/images/randomDog.png';
 import swipe from '../../assets/images/swipe.png';
 import testBox from '../../assets/images/testBox.png';
 import GradientText from '../../components/GradientText/GradientText';
+import {usePetContext} from '../../contexts/PetContext';
 
 const ViewPetScreen = () => {
   const route = useRoute<ViewPetRouteProp>();
   const {id} = route.params;
+  const {count} = usePetContext();
+  const [idValue, setIdValue] = useState(id);
 
   const [petName, setPetName] = useState<string>('');
   const [breed, setBreed] = useState<string>('');
@@ -35,11 +39,11 @@ const ViewPetScreen = () => {
   const [born, setBorn] = useState<string>('');
 
   const readData = async () => {
-    const petName = await AsyncStorage.getItem(`petName${id}`);
-    const petAge = await AsyncStorage.getItem(`age${id}`);
-    const petImage = await AsyncStorage.getItem(`image${id}`);
-    const petBreed = await AsyncStorage.getItem(`breed${id}`);
-    const petGender = await AsyncStorage.getItem(`gender${id}`);
+    const petName = await AsyncStorage.getItem(`petName${idValue}`);
+    const petAge = await AsyncStorage.getItem(`age${idValue}`);
+    const petImage = await AsyncStorage.getItem(`image${idValue}`);
+    const petBreed = await AsyncStorage.getItem(`breed${idValue}`);
+    const petGender = await AsyncStorage.getItem(`gender${idValue}`);
 
     return {petName, petAge, petImage, petBreed, petGender};
   };
@@ -55,7 +59,7 @@ const ViewPetScreen = () => {
     };
 
     callData();
-  }, [id]);
+  }, [idValue]);
 
   useEffect(() => {
     let timeNow = new Date();
@@ -63,8 +67,35 @@ const ViewPetScreen = () => {
     setBorn(formatDistance(age, timeNow));
   }, [age]);
 
+  useEffect(() => {
+    setIdValue(id);
+  }, [id]);
+
+  const Next = () => {
+    if (idValue < count - 1) {
+      setIdValue(idValue + 1);
+    }
+  };
+
+  const Previous = () => {
+    if (idValue > 0) {
+      setIdValue(idValue - 1);
+    }
+  };
+
+  let touchY = 0;
+
   return (
-    <View style={styles.page}>
+    <View
+      style={styles.page}
+      onTouchStart={e => (touchY = e.nativeEvent.pageX)}
+      onTouchEnd={e => {
+        if (touchY - e.nativeEvent.pageX > 20) {
+          Next();
+        } else if (touchY + e.nativeEvent.pageX > 20) {
+          Previous();
+        }
+      }}>
       <View style={styles.AddImage}>
         {image === undefined ? (
           <Image
@@ -104,9 +135,24 @@ const ViewPetScreen = () => {
         <View style={styles.BoxField}>
           <Text style={styles.BoxText}>{gender || 'Girl'}</Text>
         </View>
-        <View>
-          <Image source={swipe} style={styles.swipe} />
-        </View>
+        <Pressable onPress={Next} style={{alignItems: 'center', marginTop: 30}}>
+          <Lottie
+            source={require('../../assets/animation/swipe.json')}
+            autoPlay
+            loop
+            style={{width: 50}}
+          />
+          {/* <Lottie
+            source={require('../../assets/animation/swipeText.json')}
+            autoPlay
+            loop
+            style={{width: 80}}
+          /> */}
+
+          <Text style={styles.swipeText}>swipe</Text>
+
+          {/* <Image source={swipe} style={styles.swipe} /> */}
+        </Pressable>
       </View>
     </View>
   );

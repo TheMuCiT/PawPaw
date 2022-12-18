@@ -62,9 +62,28 @@ const styles = StyleSheet.create({
   },
 
   swipe: {
-    width: 51,
-    height: 74,
-    marginTop: 30,
+    fontSize: fonts.size.md,
+    fontFamily: fonts.family.semiBold,
+    colors: colors.inputBC,
+
+    textTransform: 'uppercase',
+
+    textShadowColor: 'rgba(185, 16, 16, 0.82)',
+    textShadowOffset: {width: 1, height: 1},
+    textShadowRadius: 4,
+  },
+
+  swipeText: {
+    fontSize: 16,
+    fontFamily: fonts.family.Bold,
+    color: colors.inputBC,
+    fontVariant: ['small-caps'],
+
+    textShadowColor: 'rgba(185, 16, 16, 0.82)',
+    textShadowOffset: {width: 2, height: 1},
+    textShadowRadius: 4,
+    marginTop: -8,
+    marginLeft: 3,
   },
 
   NameContainer: {

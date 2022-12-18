@@ -12,6 +12,7 @@ const styles = StyleSheet.create({
     shadowRadius: 9,
     elevation: 9,
     marginHorizontal: sizes.padding.main,
+    overflow: 'hidden',
   },
   BCImage: {
     position: 'absolute',

@@ -33,6 +33,8 @@ const styles = StyleSheet.create({
     textTransform: 'uppercase',
     color: colors.main,
     marginTop: -10,
+    alignItems: 'center',
+    textAlign: 'center',
 
     textShadowColor: '#00000091',
     textShadowOffset: {width: 0, height: 3},
