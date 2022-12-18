@@ -32,7 +32,7 @@ const styles = StyleSheet.create({
     fontFamily: fonts.family.regular,
     textTransform: 'uppercase',
     color: colors.main,
-    marginTop: -10,
+    marginTop: -5,
     alignItems: 'center',
     textAlign: 'center',
 

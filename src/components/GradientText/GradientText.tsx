@@ -13,6 +13,8 @@ const GradientText = ({name, style, offset}: IGradientText) => {
   return (
     <View>
       <Text
+        numberOfLines={1}
+        adjustsFontSizeToFit
         style={[
           style,
           {
@@ -26,14 +28,24 @@ const GradientText = ({name, style, offset}: IGradientText) => {
       </Text>
       <MaskedView
         maskElement={
-          <Text style={[style, {backgroundColor: 'transparent'}]}>{name}</Text>
+          <Text
+            numberOfLines={1}
+            adjustsFontSizeToFit
+            style={[style, {backgroundColor: 'transparent'}]}>
+            {name}
+          </Text>
         }>
         <LinearGradient
           start={{x: 0, y: 0}}
           locations={[0, offset, 1]}
           end={{x: 0, y: 1}}
           colors={['black', 'black', 'red']}>
-          <Text style={[style, {opacity: 0}]}>{name}</Text>
+          <Text
+            numberOfLines={1}
+            adjustsFontSizeToFit
+            style={[style, {opacity: 0}]}>
+            {name}{' '}
+          </Text>
         </LinearGradient>
       </MaskedView>
     </View>
