@@ -24,7 +24,7 @@ const styles = StyleSheet.create({
     backgroundColor: colors.imageCover,
   },
   logo: {
-    top: '15%',
+    top: '12%',
     alignItems: 'center',
   },
   name: {
@@ -32,11 +32,19 @@ const styles = StyleSheet.create({
     fontFamily: fonts.family.regular,
     textTransform: 'uppercase',
     color: colors.main,
-    marginTop: -15,
+    marginTop: -10,
+    alignItems: 'center',
+    textAlign: 'center',
+
+    textShadowColor: '#00000091',
+    textShadowOffset: {width: 0, height: 3},
+    textShadowRadius: 7,
+
+    letterSpacing: 2,
   },
 
   bDay: {
-    top: '25%',
+    top: '22%',
     alignItems: 'center',
   },
   bDayWrapper: {
@@ -44,7 +52,7 @@ const styles = StyleSheet.create({
   },
   bDayText: {
     color: colors.white,
-    fontFamily: fonts.family.semiBold,
+    fontFamily: fonts.family.InterMedium,
     fontSize: fonts.size.xxlg,
   },
   bDayTextTH: {
@@ -66,12 +74,12 @@ const styles = StyleSheet.create({
   },
 
   timerTime: {
-    fontSize: fonts.size.lg,
-    fontFamily: fonts.family.semiBold,
+    fontSize: fonts.size.xlg,
+    fontFamily: fonts.family.InterSemiBold,
     color: colors.white,
   },
   timerText: {
-    fontSize: fonts.size.default,
+    fontSize: fonts.size.md,
     fontFamily: fonts.family.medium,
     color: colors.white,
   },

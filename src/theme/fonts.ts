@@ -33,7 +33,7 @@ const size = {
   /**
    * @param 38
    */
-  xxxlg: 80,
+  xxxlg: 38,
   /**
    * @param 64
    */
@@ -62,6 +62,16 @@ const family = {
    * @param 700
    */
   Bold: 'Raleway-Bold',
+
+  /**
+   * @param "InterMedium 500"
+   */
+  InterMedium: 'Inter-Medium',
+
+  /**
+   * @param "InterSemiBold 600"
+   */
+  InterSemiBold: 'Inter-SemiBold',
 };
 
 export default {size, family};

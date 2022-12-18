@@ -12,33 +12,26 @@ const styles = StyleSheet.create({
     position: 'absolute',
     width: '100%',
     height: '100%',
+    zIndex: -5,
   },
   AddImage: {
     marginTop: 30,
     marginHorizontal: sizes.padding.main,
-    height: '30%',
     borderRadius: sizes.bordersRadius.button,
-  },
-  addImageContainer: {
-    backgroundColor: '#1e1e1ead',
-    height: 160,
-    borderRadius: sizes.bordersRadius.button,
+    alignItems: 'center',
   },
 
-  addImageEmpty: {
-    alignItems: 'center',
-    height: 160,
-    justifyContent: 'center',
-  },
-  image: {
-    borderRadius: sizes.bordersRadius.button,
-  },
   InputsContainer: {
+    flex: 1,
     width: '100%',
+    bottom: 0,
+    justifyContent: 'flex-end',
+    marginBottom: sizes.height.navBarHeight,
+    paddingBottom: 10,
   },
   Inputs: {
     marginTop: 20,
-    marginBottom: 50,
+    marginBottom: 5,
     marginHorizontal: sizes.padding.mainHorizontal,
   },
 
@@ -55,6 +48,29 @@ const styles = StyleSheet.create({
     fontSize: fonts.size.default,
     fontFamily: fonts.family.regular,
     opacity: 0.65,
+  },
+
+  InputElementDrop: {
+    width: '100%',
+    height: sizes.height.input,
+
+    backgroundColor: colors.inputBC,
+    borderRadius: sizes.bordersRadius.input,
+
+    paddingHorizontal: sizes.padding.inputHorizontal,
+    marginBottom: sizes.padding.inputBottom,
+
+    fontSize: fonts.size.default,
+    fontFamily: fonts.family.regular,
+    opacity: 0.65,
+
+    borderWidth: 0,
+  },
+
+  InputElementDropText: {
+    color: colors.inputText,
+    fontSize: fonts.size.default,
+    fontFamily: fonts.family.regular,
   },
 
   InputElementDate: {
@@ -98,6 +114,20 @@ const styles = StyleSheet.create({
     position: 'absolute',
     top: '2%',
     left: '3%',
+  },
+
+  bcLogoSmall1: {
+    position: 'absolute',
+    top: '25%',
+    right: '27.5%',
+    transform: [{rotate: '46.3deg'}],
+  },
+
+  bcLogoSmall2: {
+    position: 'absolute',
+    top: '40%',
+    left: '26%',
+    transform: [{rotate: '-121.76deg'}],
   },
 });
 

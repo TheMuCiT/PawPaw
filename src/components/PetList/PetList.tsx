@@ -1,4 +1,12 @@
-import {View, Text, Image, Pressable, Alert} from 'react-native';
+import {
+  View,
+  Text,
+  Image,
+  Pressable,
+  Alert,
+  Animated,
+  useWindowDimensions,
+} from 'react-native';
 import styles from './styles';
 import {useNavigation} from '@react-navigation/native';
 
@@ -8,11 +16,12 @@ import usePetManageService from '../../services/PetManageService/PetManageServic
 //assets
 import Edit from '../../assets/icons/Edit';
 import Delete from '../../assets/icons/DeletePet';
-import Re from '../../assets/icons/re';
 import {IPetData} from '../../types/AppTypes';
 import {PetListNavigatorProp} from '../../types/navigation';
 
 import RandomDog from '../../assets/images/randomDog.png';
+import GradientText from '../GradientText/GradientText';
+import {useRef, useState} from 'react';
 
 interface IPet {
   pet: IPetData;
@@ -22,6 +31,10 @@ const PetList = ({pet}: IPet) => {
   const navigation = useNavigation<PetListNavigatorProp>();
   const {DeletePet} = usePetManageService();
 
+  const {width} = useWindowDimensions();
+
+  const heightAnim = useState(new Animated.Value(width - 120))[0];
+
   const deleteItem = () => {
     Alert.alert('Warning', `Do you really want to delete ${pet.name}?`, [
       {
@@ -30,7 +43,7 @@ const PetList = ({pet}: IPet) => {
       },
       {
         text: 'OK',
-        onPress: () => DeletePet(pet.id),
+        onPress: () => animation(),
       },
     ]);
   };
@@ -39,12 +52,24 @@ const PetList = ({pet}: IPet) => {
     navigation.navigate('UpdateItem', {id: pet.id});
   };
 
+  const animation = () => {
+    //size down
+    Animated.timing(heightAnim, {
+      toValue: 0,
+      duration: 1000,
+      useNativeDriver: false,
+    }).start();
+    //after animation
+    //DeletePet(pet.id)
+  };
+
   return (
-    <View style={styles.item}>
+    <Animated.View style={[styles.item, {height: heightAnim}]}>
       <Image
         source={pet.image ? {uri: pet.image} : RandomDog}
         style={styles.BCImage}
       />
+      {pet.image && <View style={styles.BCImageCover} />}
 
       <View style={styles.content}>
         <View style={styles.options}>
@@ -56,11 +81,11 @@ const PetList = ({pet}: IPet) => {
           </Pressable>
         </View>
         <View style={styles.nameContainer}>
-          <Re />
+          <GradientText name={pet.name} style={styles.petName} offset={0.3} />
           <Text style={styles.petAge}>5 Months old</Text>
         </View>
       </View>
-    </View>
+    </Animated.View>
   );
 };
 
