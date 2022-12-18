@@ -90,9 +90,9 @@ const ViewPetScreen = () => {
       style={styles.page}
       onTouchStart={e => (touchY = e.nativeEvent.pageX)}
       onTouchEnd={e => {
-        if (touchY - e.nativeEvent.pageX > 20) {
+        if (touchY - e.nativeEvent.pageX > 50) {
           Next();
-        } else if (touchY + e.nativeEvent.pageX > 20) {
+        } else if (touchY + e.nativeEvent.pageX > 50) {
           Previous();
         }
       }}>
@@ -124,7 +124,9 @@ const ViewPetScreen = () => {
 
       <View style={styles.MainBox}>
         <Image source={testBox} style={styles.BoxBcImage} />
-        <GradientText name={petName} style={styles.petName} offset={0.3} />
+        <View style={{paddingHorizontal: 50}}>
+          <GradientText name={petName} style={styles.petName} offset={0.3} />
+        </View>
         <View style={{marginBottom: 40}} />
         <View style={styles.BoxField}>
           <Text style={styles.BoxText}>{breed}</Text>

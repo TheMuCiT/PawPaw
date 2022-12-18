@@ -28,6 +28,8 @@ const styles = StyleSheet.create({
     justifyContent: 'flex-end',
     marginBottom: sizes.height.navBarHeight,
     paddingBottom: 10,
+    maxWidth: 400,
+    alignSelf: 'center',
   },
   Inputs: {
     marginTop: 20,
@@ -127,6 +129,20 @@ const styles = StyleSheet.create({
     position: 'absolute',
     top: '40%',
     left: '26%',
+    transform: [{rotate: '-121.76deg'}],
+  },
+
+  bcLogoSmall11: {
+    position: 'absolute',
+    top: '25%',
+    right: '33%',
+    transform: [{rotate: '46.3deg'}],
+  },
+
+  bcLogoSmall22: {
+    position: 'absolute',
+    top: '40%',
+    left: '33%',
     transform: [{rotate: '-121.76deg'}],
   },
 });

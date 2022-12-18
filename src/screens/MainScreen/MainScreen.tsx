@@ -102,7 +102,9 @@ const MainScreen = () => {
       <View style={[styles.imageCover, {width: width, height: height}]} />
       <View style={styles.logo}>
         <Logo />
-        <Text style={styles.name}>{pet.name}</Text>
+        <Text numberOfLines={1} adjustsFontSizeToFit style={styles.name}>
+          {pet.name}
+        </Text>
       </View>
       <View style={styles.bDay}>
         <View style={styles.bDayWrapper}>

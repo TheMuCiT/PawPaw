@@ -106,6 +106,7 @@ const NewPetScreen = () => {
         await saveImage(imageBase, count);
         updateCount(count + 1);
         updatePage();
+        //TODO
         navigation.navigate('HomeStack');
       } catch (e) {
         Alert.alert('Error ', (e as Error).message);

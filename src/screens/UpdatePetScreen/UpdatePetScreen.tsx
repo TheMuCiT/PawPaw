@@ -41,6 +41,7 @@ import NewPet from '../../assets/images/NewPet.png';
 import AddImage from '../../assets/images/AddImage.png';
 import EditImage from '../../assets/images/EditImage.png';
 import DropDownPicker from 'react-native-dropdown-picker';
+import BCLogoSmall from '../../assets/icons/BCLogoSmall';
 
 const UpdatePetScreen = () => {
   const scrollViewRef = useRef<ScrollView | null>(null);
@@ -165,10 +166,28 @@ const UpdatePetScreen = () => {
               style={{width: '250%', resizeMode: 'contain'}}
             />
           ) : (
-            <Image
-              source={EditImage}
-              style={{width: '250%', resizeMode: 'contain'}}
-            />
+            <>
+              <Image
+                source={{uri: 'data:image/png;base64,' + image}}
+                style={{
+                  width: '100%',
+                  height: 180,
+                  maxWidth: 300,
+                  resizeMode: 'cover',
+                  borderRadius: 7,
+                }}
+              />
+              <View
+                style={{
+                  width: '100%',
+                  height: 180,
+                  maxWidth: 300,
+                  position: 'absolute',
+                  backgroundColor: '#000000',
+                  borderRadius: 7,
+                  opacity: 0.38,
+                }}></View>
+            </>
           )}
         </Pressable>
 
@@ -292,6 +311,8 @@ const UpdatePetScreen = () => {
                 shadowRadius: 10,
               }}>
               <Pressable onPress={updateData} style={styles.Button}>
+                <BCLogoSmall style={styles.bcLogoSmall11} />
+                <BCLogoSmall style={styles.bcLogoSmall22} />
                 <Text style={styles.ButtonText}>
                   {loading
                     ? 'Loading'

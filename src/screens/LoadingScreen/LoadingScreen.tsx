@@ -5,6 +5,7 @@ import styles from './styles';
 
 //assets
 import PawPawLoadingScreen from '../../assets/images/PawPawLoadingScreen.png';
+import Logo from '../../assets/icons/LogoLoading';
 
 const LoadingScreen = () => {
   return (
@@ -12,6 +13,7 @@ const LoadingScreen = () => {
       <Image source={PawPawLoadingScreen} style={styles.image} />
 
       <View style={styles.logoContainer}>
+        <Logo />
         <Text style={styles.logoText}>pawpaw</Text>
         <Text style={styles.logoSubText}>age tracker</Text>
       </View>

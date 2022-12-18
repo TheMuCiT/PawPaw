@@ -59,6 +59,7 @@ const styles = StyleSheet.create({
     color: colors.white,
     opacity: 0.73,
     letterSpacing: 1,
+    textAlign: 'center',
   },
 
   swipe: {
