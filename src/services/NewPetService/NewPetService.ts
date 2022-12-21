@@ -3,12 +3,20 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 import {format} from 'date-fns';
 
 const useNewPetService = () => {
-  const validateInput = (petName: string, breed: string, age: Date) => {
+  const validateInput = (
+    petName: string,
+    breed: string,
+    age: Date,
+    gander: string,
+  ) => {
     let validValue = true;
     if (petName.length < 2) {
       validValue = false;
       return false;
     } else if (breed.length < 2) {
+      validValue = false;
+      return false;
+    } else if (gander !== 'Male' && gander != 'Female') {
       validValue = false;
       return false;
     }
@@ -28,7 +36,7 @@ const useNewPetService = () => {
       if (imageBase) {
         await AsyncStorage.setItem(`image${count}`, imageBase);
       } else {
-        await AsyncStorage.removeItem(`image`);
+        await AsyncStorage.removeItem(`image${count}`);
       }
     } catch (e) {
       Alert.alert('Error ', (e as Error).message);

@@ -13,9 +13,10 @@ const useMainScreenService = () => {
   const ReadData = async () => {
     setPetData([]);
     let id = 0,
+      ID = '',
       name = '',
-      breed = '',
       image = undefined,
+      gender = '',
       age = new Date();
     for (let index = 0; index < count; index++) {
       try {
@@ -27,6 +28,12 @@ const useMainScreenService = () => {
         const ageString = await AsyncStorage.getItem(`age${index}`);
         age = new Date(ageString ? ageString : '');
 
+        const IDString = await AsyncStorage.getItem(`id${index}`);
+        if (IDString) ID = IDString;
+
+        const resultGender = await AsyncStorage.getItem(`gender${index}`);
+        if (resultGender) gender = resultGender;
+
         const imageResult = await AsyncStorage.getItem(`image${index}`);
         if (imageResult) {
           image = 'data:image/png;base64,' + imageResult;
@@ -34,7 +41,14 @@ const useMainScreenService = () => {
           image = undefined;
         }
 
-        petData.push({id, name, breed: '', age, image});
+        petData.push({
+          id,
+          ID,
+          name,
+          gender,
+          age,
+          image,
+        });
       } catch (e) {
         Alert.alert('Error ', (e as Error).message);
       }

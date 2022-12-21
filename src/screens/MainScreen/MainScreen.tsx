@@ -31,7 +31,7 @@ import RandomDog from '../../assets/images/randomDog.png';
 const MainScreen = () => {
   const navigation = useNavigation<MainScreenNavigatorProp>();
 
-  const {count} = usePetContext();
+  const {count, updateCount} = usePetContext();
   const {ReadData} = useMainScreenService();
 
   const {height, width} = useWindowDimensions();

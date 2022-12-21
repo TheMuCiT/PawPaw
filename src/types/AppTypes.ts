@@ -1,7 +1,8 @@
 export type IPetData = {
   id: number;
+  ID: string;
   name: string;
-  breed: string;
+  gender: string;
   age: Date;
   image: string | undefined;
 };

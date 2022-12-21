@@ -29,7 +29,7 @@ const styles = StyleSheet.create({
   },
   name: {
     fontSize: fonts.size.logo,
-    fontFamily: fonts.family.regular,
+    fontFamily: fonts.family.InterMedium,
     textTransform: 'uppercase',
     color: colors.main,
     marginTop: -5,

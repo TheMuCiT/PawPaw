@@ -8,6 +8,7 @@ import {
   ScrollView,
   KeyboardAvoidingView,
   Platform,
+  Keyboard,
 } from 'react-native';
 import {useRef, useState} from 'react';
 import styles from './styles';
@@ -19,6 +20,7 @@ import DatePicker from 'react-native-date-picker';
 import {launchImageLibrary} from 'react-native-image-picker';
 import {useNavigation} from '@react-navigation/native';
 import DropShadow from 'react-native-drop-shadow';
+import uuid from 'react-native-uuid';
 
 //files
 import {usePetContext} from '../../contexts/PetContext';
@@ -38,7 +40,7 @@ import DropDownPicker from 'react-native-dropdown-picker';
 const NewPetScreen = () => {
   const scrollViewRef = useRef<ScrollView | null>(null);
   const navigation = useNavigation<NewPetScreenNavigatorProp>();
-  const {count, updateCount} = usePetContext();
+  const {count, dataChange, updateCount, setDataChange} = usePetContext();
   const {validateInput, saveImage} = useNewPetService();
 
   const [petName, setPetName] = useState<string>('');
@@ -69,6 +71,7 @@ const NewPetScreen = () => {
   ];
 
   const launchImagePicker = async () => {
+    Keyboard.dismiss();
     const result = await launchImageLibrary({
       mediaType: 'photo',
       includeBase64: true,
@@ -95,19 +98,23 @@ const NewPetScreen = () => {
 
   const saveData = async () => {
     setLoading(true);
-    let response = validateInput(petName, breed, age);
+    let response = validateInput(petName, breed, age, gender);
     setValid(v => response);
+
     if (response) {
       try {
         await AsyncStorage.setItem(`petName${count}`, petName);
         await AsyncStorage.setItem(`breed${count}`, breed);
         await AsyncStorage.setItem(`age${count}`, format(age, 'yyyy-MM-dd'));
         await AsyncStorage.setItem(`gender${count}`, gender);
+        await AsyncStorage.setItem(`id${count}`, uuid.v4().toString());
         await saveImage(imageBase, count);
         updateCount(count + 1);
+        setDataChange(!dataChange);
         updatePage();
-        //TODO
-        navigation.navigate('HomeStack');
+        if (count !== 0) {
+          navigation.navigate('HomeStack');
+        }
       } catch (e) {
         Alert.alert('Error ', (e as Error).message);
       }
@@ -137,10 +144,28 @@ const NewPetScreen = () => {
               style={{width: '250%', resizeMode: 'contain'}}
             />
           ) : (
-            <Image
-              source={EditImage}
-              style={{width: '250%', resizeMode: 'contain'}}
-            />
+            <>
+              <Image
+                source={{uri: 'data:image/png;base64,' + image}}
+                style={{
+                  width: '100%',
+                  height: 180,
+                  maxWidth: 300,
+                  resizeMode: 'cover',
+                  borderRadius: 7,
+                }}
+              />
+              <View
+                style={{
+                  width: '100%',
+                  height: 180,
+                  maxWidth: 300,
+                  position: 'absolute',
+                  backgroundColor: '#000000',
+                  borderRadius: 7,
+                  opacity: 0.38,
+                }}></View>
+            </>
           )}
         </Pressable>
 
