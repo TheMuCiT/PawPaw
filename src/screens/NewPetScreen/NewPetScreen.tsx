@@ -146,7 +146,13 @@ const NewPetScreen = () => {
           ) : (
             <>
               <Image
-                source={{uri: 'data:image/png;base64,' + image}}
+                source={
+                  imageBase
+                    ? {uri: 'data:image/png;base64,' + imageBase}
+                    : {
+                        uri: 'data:image/png;base64,' + image,
+                      }
+                }
                 style={{
                   width: '100%',
                   height: 180,
