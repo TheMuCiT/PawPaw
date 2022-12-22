@@ -94,6 +94,7 @@ const NewPetScreen = () => {
     setShowDate(false);
     setImage(undefined);
     setGender('');
+    setImageBase(undefined);
   };
 
   const saveData = async () => {
