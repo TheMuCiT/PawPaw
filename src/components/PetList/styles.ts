@@ -13,6 +13,7 @@ const styles = StyleSheet.create({
     elevation: 9,
     marginHorizontal: sizes.padding.main,
     overflow: 'hidden',
+    backgroundColor: 'orange',
   },
   BCImage: {
     position: 'absolute',
@@ -29,6 +30,8 @@ const styles = StyleSheet.create({
   },
   content: {
     padding: sizes.padding.listItemPadding,
+
+    height: '100%',
   },
   options: {
     flexDirection: 'row',
@@ -49,6 +52,13 @@ const styles = StyleSheet.create({
     marginTop: sizes.padding.listItemNameTop,
     marginBottom: sizes.padding.listItemNameBottom,
     alignItems: 'center',
+    justifyContent: 'center',
+
+    position: 'absolute',
+    top: 0,
+    left: 0,
+    right: 0,
+    bottom: 0,
   },
   petName: {
     fontSize: fonts.size.xxxlg,

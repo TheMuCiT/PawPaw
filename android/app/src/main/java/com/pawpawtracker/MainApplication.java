@@ -1,4 +1,4 @@
-package com.pawpawtracker;
+package com.personaltouchlt.pawpawtracker;
 
 import android.app.Application;
 import android.content.Context;

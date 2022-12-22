@@ -31,7 +31,7 @@ import RandomDog from '../../assets/images/randomDog.png';
 const MainScreen = () => {
   const navigation = useNavigation<MainScreenNavigatorProp>();
 
-  const {count} = usePetContext();
+  const {count, updateCount} = usePetContext();
   const {ReadData} = useMainScreenService();
 
   const {height, width} = useWindowDimensions();
@@ -100,13 +100,13 @@ const MainScreen = () => {
         style={[styles.BCImage, {width: width, height: height}]}
       />
       <View style={[styles.imageCover, {width: width, height: height}]} />
-      <View style={styles.logo}>
+      <View style={height > 650 ? styles.logo : styles.logoSmall}>
         <Logo />
         <Text numberOfLines={1} adjustsFontSizeToFit style={styles.name}>
           {pet.name}
         </Text>
       </View>
-      <View style={styles.bDay}>
+      <View style={height > 650 ? styles.bDay : styles.bDaySmall}>
         <View style={styles.bDayWrapper}>
           <Text style={styles.bDayText}>{format(pet.age, 'MMMM d')}</Text>
           <Text style={styles.bDayTextTH}>
@@ -114,7 +114,7 @@ const MainScreen = () => {
           </Text>
         </View>
       </View>
-      <View style={styles.timer}>
+      <View style={height > 650 ? styles.timer : styles.timerSmall}>
         <View style={styles.timerBox}>
           <Text style={styles.timerTime}>{years.toString()}</Text>
           <Text style={styles.timerText}>Years</Text>
@@ -128,7 +128,7 @@ const MainScreen = () => {
           <Text style={styles.timerText}>Days</Text>
         </View>
       </View>
-      <View style={styles.navigation}>
+      <View style={height > 650 ? styles.navigation : styles.navigationSmall}>
         <Pressable
           onPress={() => Previous()}
           style={[

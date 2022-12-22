@@ -21,7 +21,7 @@ const GradientText = ({name, style, offset}: IGradientText) => {
             position: 'absolute',
             color: '#ffffff',
             textShadowColor: '#ffffff',
-            textShadowRadius: 15,
+            textShadowRadius: 5,
           },
         ]}>
         {name}

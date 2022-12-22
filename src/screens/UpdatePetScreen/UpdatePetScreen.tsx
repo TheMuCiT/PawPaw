@@ -8,6 +8,7 @@ import {
   ScrollView,
   KeyboardAvoidingView,
   Platform,
+  Keyboard,
 } from 'react-native';
 import {useEffect, useRef, useState} from 'react';
 import styles from '../NewPetScreen/styles';
@@ -49,7 +50,7 @@ const UpdatePetScreen = () => {
   const {id} = route.params;
   const navigation = useNavigation<UpdatePetNavigatorProp>();
   const {validateInput, saveImage} = useNewPetService();
-  const {count, updateCount} = usePetContext();
+  const {count, dataChange, updateCount, setDataChange} = usePetContext();
 
   const [petName, setPetName] = useState<string>('');
   const [breed, setBreed] = useState<string>('');
@@ -79,6 +80,7 @@ const UpdatePetScreen = () => {
   ];
 
   const launchImagePicker = async () => {
+    Keyboard.dismiss();
     const result = await launchImageLibrary({
       mediaType: 'photo',
       includeBase64: true,
@@ -103,7 +105,7 @@ const UpdatePetScreen = () => {
     setLoading(true);
     let x = count;
     updateCount(x - 1);
-    let response = validateInput(petName, breed, age);
+    let response = validateInput(petName, breed, age, gender);
     setValid(v => response);
     if (response) {
       try {
@@ -113,6 +115,7 @@ const UpdatePetScreen = () => {
         await AsyncStorage.setItem(`gender${id}`, gender);
         await saveImage(imageBase, id);
         updatePage();
+        setDataChange(!dataChange);
         updateCount(x);
       } catch (e) {
         Alert.alert('Error ', (e as Error).message);
@@ -168,7 +171,13 @@ const UpdatePetScreen = () => {
           ) : (
             <>
               <Image
-                source={{uri: 'data:image/png;base64,' + image}}
+                source={
+                  imageBase
+                    ? {uri: 'data:image/png;base64,' + imageBase}
+                    : {
+                        uri: 'data:image/png;base64,' + image,
+                      }
+                }
                 style={{
                   width: '100%',
                   height: 180,

@@ -16,6 +16,7 @@ export type BottomTabNavigatorParamList = {
 export type PetListStackNavigatorParamList = {
   PetList: undefined;
   UpdateItem: {id: number};
+  AddPet: undefined;
 };
 
 export type MainScreenNavigatorProp = NativeStackNavigationProp<

@@ -16,7 +16,7 @@ import PetList from '../../components/PetList';
 import BackgroundLogo from '../../assets/icons/BackgroundLogo';
 
 const PetListScreen = () => {
-  const {count} = usePetContext();
+  const {dataChange} = usePetContext();
 
   const [petData, setPetData] = useState<Array<IPetData>>([]);
 
@@ -29,7 +29,7 @@ const PetListScreen = () => {
     };
 
     callData();
-  }, [count]);
+  }, [dataChange]);
 
   if (!petData) {
     return <ActivityIndicator />;
@@ -54,6 +54,7 @@ const PetListScreen = () => {
         <View style={styles.list}>
           <FlatList
             data={petData}
+            extraData={petData}
             showsHorizontalScrollIndicator={false}
             showsVerticalScrollIndicator={false}
             contentContainerStyle={{paddingBottom: 50}}
