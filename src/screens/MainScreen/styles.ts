@@ -27,6 +27,10 @@ const styles = StyleSheet.create({
     top: '12%',
     alignItems: 'center',
   },
+  logoSmall: {
+    top: '2%',
+    alignItems: 'center',
+  },
   name: {
     fontSize: fonts.size.logo,
     fontFamily: fonts.family.InterMedium,
@@ -47,6 +51,11 @@ const styles = StyleSheet.create({
     top: '22%',
     alignItems: 'center',
   },
+
+  bDaySmall: {
+    top: '10%',
+    alignItems: 'center',
+  },
   bDayWrapper: {
     flexDirection: 'row',
   },
@@ -62,6 +71,11 @@ const styles = StyleSheet.create({
   },
   timer: {
     top: '55%',
+    flexDirection: 'row',
+    justifyContent: 'center',
+  },
+  timerSmall: {
+    top: '30%',
     flexDirection: 'row',
     justifyContent: 'center',
   },
@@ -86,6 +100,12 @@ const styles = StyleSheet.create({
 
   navigation: {
     top: '70%',
+    justifyContent: 'center',
+    flexDirection: 'row',
+  },
+
+  navigationSmall: {
+    top: '40%',
     justifyContent: 'center',
     flexDirection: 'row',
   },
