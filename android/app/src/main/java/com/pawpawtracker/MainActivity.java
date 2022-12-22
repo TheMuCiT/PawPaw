@@ -1,4 +1,4 @@
-package com.pawpawtracker;
+package com.personaltouchlt.pawpawtracker;
 
 import com.facebook.react.ReactActivity;
 import com.facebook.react.ReactActivityDelegate;
