@@ -47,10 +47,12 @@ const PetList = ({pet}: IPet) => {
 
   const [heightAnim] = useState(() => new Animated.Value(width - 120));
   const [marginAnim] = useState(() => new Animated.Value(20));
+  const [opacityAnim] = useState(() => new Animated.Value(1));
 
   useEffect(() => {
     heightAnim.setValue(width - 120);
     marginAnim.setValue(20);
+    opacityAnim.setValue(1);
   }, [dataChange]);
 
   useEffect(() => {
@@ -96,6 +98,13 @@ const PetList = ({pet}: IPet) => {
       duration: 1000,
       useNativeDriver: false,
     }).start();
+
+    Animated.timing(opacityAnim, {
+      toValue: 0,
+      duration: 200,
+      delay: 200,
+      useNativeDriver: false,
+    }).start();
     //after animation
 
     if (last) {
@@ -124,10 +133,10 @@ const PetList = ({pet}: IPet) => {
             <Delete />
           </Pressable>
         </View>
-        <View style={styles.nameContainer}>
+        <Animated.View style={[styles.nameContainer, {opacity: opacityAnim}]}>
           <GradientText name={pet.name} style={styles.petName} offset={0.3} />
           <Text style={styles.petAge}>{born}</Text>
-        </View>
+        </Animated.View>
       </View>
     </Animated.View>
   );
