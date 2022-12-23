@@ -8,67 +8,71 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: colors.bcMain,
   },
-  linearGradient: {
-    flex: 1,
+  BCImage: {
+    position: 'absolute',
     width: '100%',
-    alignItems: 'center',
-    justifyContent: 'flex-start',
+    height: '100%',
+    zIndex: -5,
   },
   AddImage: {
-    height: '30%',
-    minHeight: 150,
-    width: '100%',
+    marginTop: 30,
+    marginHorizontal: sizes.padding.main,
+    borderRadius: sizes.bordersRadius.button,
     alignItems: 'center',
-    justifyContent: 'center',
-    backgroundColor: colors.imageAddBackground,
   },
-  AddImageText: {
-    fontSize: fonts.size.md,
-    fontFamily: fonts.family.semiBold,
-    color: colors.main,
-    marginBottom: 10,
-  },
+
   InputsContainer: {
+    flex: 1,
     width: '100%',
+    bottom: 0,
+    justifyContent: 'flex-end',
+    marginBottom: sizes.height.navBarHeight,
+    paddingBottom: 10,
+    maxWidth: 400,
+    alignSelf: 'center',
   },
   Inputs: {
     marginTop: 20,
-    marginBottom: 50,
+    marginBottom: 5,
     marginHorizontal: sizes.padding.mainHorizontal,
   },
 
   InputElement: {
     width: '100%',
     height: sizes.height.input,
-    color: colors.main,
+    color: colors.inputText,
     backgroundColor: colors.inputBC,
     borderRadius: sizes.bordersRadius.input,
-    borderColor: colors.border,
-    borderWidth: sizes.borderWidth.input,
+
     paddingHorizontal: sizes.padding.inputHorizontal,
-    placeholderTextColor: 'red',
     marginBottom: sizes.padding.inputBottom,
 
-    fontSize: fonts.size.sm,
+    fontSize: fonts.size.default,
     fontFamily: fonts.family.regular,
+    opacity: 0.65,
   },
 
-  a: {
-    borderRadius: sizes.bordersRadius.input,
-    borderColor: colors.border,
-    borderWidth: sizes.borderWidth.input,
+  InputElementDrop: {
+    width: '100%',
+    height: sizes.height.input,
+
     backgroundColor: colors.inputBC,
+    borderRadius: sizes.bordersRadius.input,
+
     paddingHorizontal: sizes.padding.inputHorizontal,
-    placeholderTextColor: 'red',
     marginBottom: sizes.padding.inputBottom,
+
+    fontSize: fonts.size.default,
+    fontFamily: fonts.family.regular,
+    opacity: 0.65,
+
+    borderWidth: 0,
   },
 
-  InputElementNote: {
-    color: colors.main,
-    fontSize: fonts.size.sm,
+  InputElementDropText: {
+    color: colors.inputText,
+    fontSize: fonts.size.default,
     fontFamily: fonts.family.regular,
-    maxHeight: 200,
-    textAlignVertical: 'top',
   },
 
   InputElementDate: {
@@ -81,71 +85,65 @@ const styles = StyleSheet.create({
     backgroundColor: colors.inputBC,
 
     borderRadius: sizes.bordersRadius.input,
-    borderColor: colors.border,
-    borderWidth: sizes.borderWidth.input,
+
     paddingHorizontal: sizes.padding.inputHorizontal,
     marginBottom: sizes.padding.inputBottom,
+
+    opacity: 0.65,
   },
 
   InputElementText: {
-    fontSize: fonts.size.sm,
+    fontSize: fonts.size.default,
     fontFamily: fonts.family.regular,
-    color: colors.main,
+    color: colors.inputText,
   },
 
   Button: {
-    backgroundColor: colors.button,
+    backgroundColor: '#2B2B2C',
     alignItems: 'center',
     borderRadius: sizes.bordersRadius.button,
   },
 
   ButtonText: {
-    color: colors.main,
-    fontSize: fonts.size.default,
-    fontFamily: fonts.family.medium,
+    color: colors.mainSecond,
+    fontSize: fonts.size.lg,
+    fontFamily: fonts.family.Bold,
     textTransform: 'uppercase',
     padding: sizes.padding.buttonPadding,
   },
 
-  BackgroundLogo1: {
-    position: 'absolute',
-    top: '80%',
-    left: '13%',
-    transform: [{rotate: '24.63deg'}],
-  },
-
-  BackgroundLogo2: {
-    position: 'absolute',
-    top: '75%',
-    right: '5%',
-    transform: [{rotate: '-10.31deg'}],
-  },
-
-  BackgroundLogo3: {
-    position: 'absolute',
-    top: '55%',
-    left: '23%',
-    transform: [{rotate: '24.63deg'}],
-  },
-
-  BackgroundLogo4: {
-    position: 'absolute',
-    top: '45%',
-    right: '15%',
-    transform: [{rotate: '-37.51deg'}],
-  },
-
-  BackgroundLogo5: {
-    position: 'absolute',
-    top: '30%',
-    left: '18%',
-    transform: [{rotate: '-23.64deg'}],
-  },
-
   BackButton: {
     position: 'absolute',
-    top: '3%',
-    left: '5%',
+    top: '2%',
+    left: '3%',
+  },
+
+  bcLogoSmall1: {
+    position: 'absolute',
+    top: '25%',
+    right: '27.5%',
+    transform: [{rotate: '46.3deg'}],
+  },
+
+  bcLogoSmall2: {
+    position: 'absolute',
+    top: '40%',
+    left: '26%',
+    transform: [{rotate: '-121.76deg'}],
+  },
+
+  bcLogoSmall11: {
+    position: 'absolute',
+    top: '25%',
+    right: '33%',
+    transform: [{rotate: '46.3deg'}],
+  },
+
+  bcLogoSmall22: {
+    position: 'absolute',
+    top: '40%',
+    left: '33%',
+    transform: [{rotate: '-121.76deg'}],
   },
 });
 

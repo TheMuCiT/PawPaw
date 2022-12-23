@@ -1,0 +1,24 @@
+name: Build and Deploy the application to staging environment
+on:
+  workflow_dispatch:
+
+  push:
+    branches:
+      - staging
+
+jobs:
+  build-android:
+    name: Install and build android app (Preview)
+    uses: ./.github/workflows/eas-build.yaml
+    secrets: inherit
+    with:
+      PLATFORM: android
+      PROFILE: preview
+
+  # build-ios:
+  #   name: Install and build ios app (Preview)
+  #   uses: ./.github/workflows/eas-build.yaml
+  #   secrets: inherit
+  #   with:
+  #     PLATFORM: ios
+  #     PROFILE: preview

@@ -9,102 +9,93 @@ const styles = StyleSheet.create({
     backgroundColor: colors.bcMain,
     height: '100%',
   },
-  linearGradient: {
-    flex: 1,
-    width: '100%',
-    alignItems: 'center',
-    justifyContent: 'flex-start',
-  },
   pageMargin: {
-    paddingHorizontal: 30,
     width: '100%',
     flex: 1,
   },
   logo: {
     alignItems: 'center',
     marginTop: 10,
+    paddingHorizontal: 30,
   },
   logoIcon: {
     width: 21,
     height: 21,
   },
-  logoText: {
-    color: colors.logo,
-    fontSize: fonts.size.xlg,
-    fontFamily: fonts.family.semiBold,
-    textTransform: 'uppercase',
-    marginTop: -10,
-  },
-  search: {
-    width: '100%',
-    height: 50,
-    backgroundColor: 'white',
-    borderRadius: sizes.bordersRadius.input,
-    marginTop: sizes.padding.listSearchTop,
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-    alignItems: 'center',
-    paddingHorizontal: sizes.padding.inputHorizontal,
-  },
-  searchText: {
-    width: '90%',
-  },
-
   list: {
-    marginTop: 20,
-    borderRadius: sizes.bordersRadius.input,
-    backgroundColor: '#00000070',
+    marginTop: 30,
     flex: 1,
-    marginBottom: 100,
+    paddingBottom: 20,
   },
 
   BackgroundLogo1: {
     position: 'absolute',
-    top: '5%',
-    left: '80%',
-    transform: [{rotate: '-30.00deg'}],
+    top: '-2%',
+    left: '20%',
+    transform: [{rotate: '-23.03deg'}],
   },
 
   BackgroundLogo2: {
     position: 'absolute',
-    top: '20%',
-    right: '35%',
-    transform: [{rotate: '-30.00deg'}],
+    top: '5%',
+    right: '10%',
+    transform: [{rotate: '-23.03deg'}],
   },
 
   BackgroundLogo3: {
     position: 'absolute',
-    top: '32%',
-    left: '2%',
-    transform: [{rotate: '24.63deg'}],
+    top: '12%',
+    left: '3%',
+    transform: [{rotate: '-23.03deg'}],
   },
 
   BackgroundLogo4: {
     position: 'absolute',
-    top: '45%',
-    right: '25%',
-    transform: [{rotate: '35.02deg'}],
+    top: '12.5%',
+    right: '35%',
+    transform: [{rotate: '-23.03deg'}],
   },
 
   BackgroundLogo5: {
     position: 'absolute',
-    top: '60%',
-    left: '-2%',
-    transform: [{rotate: '-10.31deg'}],
+    top: '30%',
+    right: '1%',
+    transform: [{rotate: '60deg'}],
   },
 
   BackgroundLogo6: {
     position: 'absolute',
-    top: '65%',
-    left: '50%',
-    transform: [{rotate: '-10.31deg'}],
+    top: '35%',
+    left: '2%',
+    transform: [{rotate: '-60deg'}],
   },
 
   BackgroundLogo7: {
     position: 'absolute',
-    top: '75%',
+    top: '49%',
+    left: '28%',
+    transform: [{rotate: '-23.03deg'}],
+  },
+
+  BackgroundLogo8: {
+    position: 'absolute',
+    bottom: '30%',
+    right: '1%',
+    transform: [{rotate: '45deg'}],
+  },
+
+  BackgroundLogo9: {
+    position: 'absolute',
+    bottom: '18%',
+    left: '1%',
+    transform: [{rotate: '-90deg'}],
+  },
+
+  BackgroundLogo10: {
+    position: 'absolute',
+    bottom: '10%',
     right: '-2%',
-    transform: [{rotate: '35.02deg'}],
+    transform: [{rotate: '-75deg'}],
   },
 });
 

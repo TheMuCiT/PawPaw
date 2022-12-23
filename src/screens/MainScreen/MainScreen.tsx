@@ -16,6 +16,8 @@ import {format, intervalToDuration} from 'date-fns';
 import {usePetContext} from '../../contexts/PetContext';
 import useMainScreenService from '../../services/MainService';
 import {IPetData} from '../../types/AppTypes';
+import {useNavigation} from '@react-navigation/native';
+import {MainScreenNavigatorProp} from '../../types/navigation';
 
 //assets
 
@@ -27,7 +29,9 @@ import ArrowRight from '../../assets/icons/ArrowRight';
 import RandomDog from '../../assets/images/randomDog.png';
 
 const MainScreen = () => {
-  const {count} = usePetContext();
+  const navigation = useNavigation<MainScreenNavigatorProp>();
+
+  const {count, updateCount} = usePetContext();
   const {ReadData} = useMainScreenService();
 
   const {height, width} = useWindowDimensions();
@@ -48,6 +52,9 @@ const MainScreen = () => {
       setPetData(result);
     };
 
+    if (activePet > count - 1) {
+      setActivePet(count - 1);
+    }
     callData();
   }, [count]);
 
@@ -82,6 +89,10 @@ const MainScreen = () => {
     }
   };
 
+  const NavigateToView = () => {
+    navigation.navigate('ViewPet', {id: pet.id});
+  };
+
   return (
     <View style={styles.page}>
       <Image
@@ -89,14 +100,21 @@ const MainScreen = () => {
         style={[styles.BCImage, {width: width, height: height}]}
       />
       <View style={[styles.imageCover, {width: width, height: height}]} />
-      <View style={styles.logo}>
+      <View style={height > 650 ? styles.logo : styles.logoSmall}>
         <Logo />
-        <Text style={styles.name}>{pet.name}</Text>
+        <Text numberOfLines={1} adjustsFontSizeToFit style={styles.name}>
+          {pet.name}
+        </Text>
       </View>
-      <View style={styles.bDay}>
-        <Text style={styles.bDayText}>{format(pet.age, 'MMMM do')}</Text>
+      <View style={height > 650 ? styles.bDay : styles.bDaySmall}>
+        <View style={styles.bDayWrapper}>
+          <Text style={styles.bDayText}>{format(pet.age, 'MMMM d')}</Text>
+          <Text style={styles.bDayTextTH}>
+            {format(pet.age, 'do').slice(-2)}
+          </Text>
+        </View>
       </View>
-      <View style={styles.timer}>
+      <View style={height > 650 ? styles.timer : styles.timerSmall}>
         <View style={styles.timerBox}>
           <Text style={styles.timerTime}>{years.toString()}</Text>
           <Text style={styles.timerText}>Years</Text>
@@ -110,7 +128,7 @@ const MainScreen = () => {
           <Text style={styles.timerText}>Days</Text>
         </View>
       </View>
-      <View style={styles.navigation}>
+      <View style={height > 650 ? styles.navigation : styles.navigationSmall}>
         <Pressable
           onPress={() => Previous()}
           style={[
@@ -120,9 +138,9 @@ const MainScreen = () => {
           <ArrowLeft />
           <Text style={styles.navigationText}>PREVIOUS</Text>
         </Pressable>
-        <View>
+        <Pressable onPress={NavigateToView}>
           <Info />
-        </View>
+        </Pressable>
         <Pressable
           onPress={() => Next()}
           style={[

@@ -5,7 +5,7 @@ import styles from './styles';
 
 //assets
 import PawPawLoadingScreen from '../../assets/images/PawPawLoadingScreen.png';
-import Logo from '../../assets/icons/Logo';
+import Logo from '../../assets/icons/LogoLoading';
 
 const LoadingScreen = () => {
   return (
